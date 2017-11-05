@@ -1,0 +1,33 @@
+.header {
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fafafa;
+}
+
+.social-link,
+.page-link {
+    width: 40%;
+}
+
+.page-link {
+    text-align: right;
+}
+
+.header-btn {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-img {
+    width: 30px;
+    height: 30px;
+}
+
+.page-btn:not(:last-child) {
+    margin-right: 30px;
+}

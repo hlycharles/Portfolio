@@ -1,0 +1,18 @@
+.intro-wrapper {
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 50px;
+    background-color: #fafafa;
+}
+
+.intro {
+    display: flex;
+    flex-direction: column;
+}
+
+.intro-text {
+    margin-left: 100px;
+}
+
+
