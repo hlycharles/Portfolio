@@ -1,5 +1,11 @@
 .section {
-    padding: 50px 0 50px 100px;
+    padding: 50px 0;
+}
+
+.section-pad,
+/* always pad section titles */
+.section-nopad > h3 {
+    padding-left: 100px;
 }
 
 .section-white {

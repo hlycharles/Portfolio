@@ -1,0 +1,19 @@
+.carousel {
+    width: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;   
+}
+
+.carousel-img {
+    flex: 0 0 auto;
+    object-fit: contain;
+}
+
+.carousel-img {
+    padding-left: 5%;
+}
+
+.carousel-img:last-child {
+    padding-right: 5%;
+}

@@ -5,7 +5,8 @@ import "./section.css";
 export default class Section extends React.Component {
     render() {
         const theme = this.props.theme || "white";
-        const className = `section section-${theme}`;
+        const padding = (this.props.padding == null || this.props.padding) ? "pad" : "nopad";
+        const className = `section section-${theme} section-${padding}`;
         return (
             <div className={className}>
                 <h3 className="title">{this.props.title}</h3>
