@@ -1,0 +1,11 @@
+.work-container {
+    transition: top 500ms ease-in-out;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 100%;
+}
+
+.work-container-entered {
+    top: 0;
+}

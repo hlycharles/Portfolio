@@ -11,15 +11,23 @@ export default class Header extends React.Component {
                         <img className="btn-img" src="asset/insta.png" />
                     </button>
                 </div>
-                <button className="header-btn home-btn">
+                <button className="header-btn home-btn" onClick={this.handleSwitchScreen("Home").bind(this)}>
                     <img className="btn-img" src="asset/home.png" />
                 </button>
                 <div className="page-link">
-                    <button className="page-btn"><h5>Work</h5></button>
+                    <button className="page-btn" onClick={this.handleSwitchScreen("Work").bind(this)}>
+                        <h5>Work</h5>
+                    </button>
                     <button className="page-btn"><h5>Projects</h5></button>
                     <button className="page-btn"><h5>Resume</h5></button>
                 </div>
             </div>
         );
+    }
+
+    handleSwitchScreen(screen) {
+        return () => {
+            this.props.onSwitchScreen(screen);
+        }
     }
 }
