@@ -50,6 +50,19 @@ export default class Home extends React.Component {
                 );
             }
         }
+        // instagram images
+        const instaImgs = [
+            {
+                src: "yosemite.jpg",
+                hwRatio: 1,
+            },{
+                src: "yosemite.jpg",
+                hwRatio: 1,
+            }, {
+                src: "yosemite.jpg",
+                hwRatio: 1,
+            },
+        ];
         return (
             <div>
                 {overlay}
@@ -59,7 +72,7 @@ export default class Home extends React.Component {
                         <h5 className="intro-text">Hello</h5>
                     </Intro>
                     <Section title="Instagram" padding={false}>
-                        <Carousel />
+                        <Carousel imgs={instaImgs}/>
                     </Section>
                     <Section title="Work Experiences">
                         <Entry title="Software Intern" content="Remitly Seattle"/>

@@ -21,13 +21,25 @@ export default class Work extends React.Component {
         if (!this.props.shouldDisplay) {
             return null;
         }
+        const instaImgs = [
+            {
+                src: "yosemite.jpg",
+                hwRatio: 1,
+            },{
+                src: "yosemite.jpg",
+                hwRatio: 1,
+            }, {
+                src: "yosemite.jpg",
+                hwRatio: 1,
+            },
+        ];
         return (
             <div className={`work-container work-container-${this.props.transitionState}`}>
                 <Intro id="intro-work">
                     <h2 className="title intro-text">Internship</h2>
                 </Intro>
                 <Section title="Photos" padding={false}>
-                    <Carousel />
+                    <Carousel imgs={instaImgs}/>
                 </Section>
             </div>
         );
