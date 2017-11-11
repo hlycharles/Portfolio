@@ -1,3 +1,25 @@
 .entry:not(:last-child) {
     margin-bottom: 30px;
 }
+
+.entry-title {
+    display: flex;
+    align-items: flex-start;
+    padding-right: 100px;
+}
+
+.entry-imgs {
+    display: flex;
+    align-items: flex-start;
+    margin-left: 100px;
+}
+
+.entry-img {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+}
+
+.entry-img:not(:first-child) {
+    margin-left: 50px;
+}

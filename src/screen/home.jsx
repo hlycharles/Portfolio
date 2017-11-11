@@ -4,6 +4,7 @@ import Intro from "../component/intro";
 import Section from "../component/section";
 import Entry from "../component/entry";
 import Carousel from "../component/carousel";
+import { getProjects } from "../util/data.js";
 
 import "./home.css";
 
@@ -63,6 +64,14 @@ export default class Home extends React.Component {
                 hwRatio: 1,
             },
         ];
+        const projects = getProjects();
+        const projectEntries = [];
+        for (let i = 0; i < projects.length; i++) {
+            const project = projects[i];
+            projectEntries.push(
+                <Entry title={project.title} content={project.intro} name={project.name} key={i} />,
+            );
+        }     
         return (
             <div>
                 {overlay}
@@ -78,7 +87,7 @@ export default class Home extends React.Component {
                         <Entry title="Software Intern" content="Remitly Seattle"/>
                     </Section>
                     <Section title="Projects" theme="gray">
-                        <Entry title="iOS Reminder App" content="XCode" />
+                        {projectEntries}
                     </Section>
                     <Section title="Resume">
                         <button><h4 className="normal">Click to view</h4></button>
