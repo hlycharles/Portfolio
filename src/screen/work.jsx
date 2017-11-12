@@ -1,4 +1,5 @@
 import React from "react";
+import $ from "jquery";
 
 import Intro from "../component/intro";
 import Section from "../component/section";
@@ -14,6 +15,12 @@ export default class Work extends React.Component {
             containers[0].addEventListener("webkitTransitionEnd", this.handleTransitionEnd.bind(this), false);
             containers[0].addEventListener("transitionend", this.handleTransitionEnd.bind(this), false);
             containers[0].addEventListener("msTransitionEnd", this.handleTransitionEnd.bind(this), false);
+        }
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (this.props.transitionState === "entered" && nextProps.transitionState === "exiting") {
+            window.scrollTo(0, 0);
         }
     }
 
@@ -46,6 +53,13 @@ export default class Work extends React.Component {
     }
 
     handleTransitionEnd() {
+        if (this.props.transitionState === "entered") {
+            const workContainers = document.getElementsByClassName("work-container");
+            if (workContainers != null && workContainers.length > 0) {
+                const workContainer = workContainers[0];
+                workContainer.classList.add("work-container-transition-complete");
+            }
+        }
         this.props.onTransitionEnd()
     }
 }

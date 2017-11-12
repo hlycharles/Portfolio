@@ -1,4 +1,5 @@
 import React from "react";
+import $ from "jquery";
 
 import Intro from "../component/intro";
 import Section from "../component/section";
@@ -31,6 +32,14 @@ export default class Home extends React.Component {
             this.setState({
                 showOverlay: true,
             });
+        }
+        if (this.props.transitionState === "entered" && nextProps.transitionState === "exiting") {
+            this.props.onRecordHomePos(-$(".home-container-content").first().offset().top);
+        }
+        if (nextProps.transitionState === "entering") {
+            $(".home-container").animate({
+                scrollTop: this.props.homePos, 
+            }, 100);
         }
     }
 
@@ -76,22 +85,24 @@ export default class Home extends React.Component {
             <div>
                 {overlay}
                 <div className={`home-container home-container-${transitionState}`}>
-                    <Intro id="intro-home">
-                        <h2 className="title intro-text">Luyao Hou</h2>
-                        <h5 className="intro-text">Hello</h5>
-                    </Intro>
-                    <Section title="Instagram" padding={false}>
-                        <Carousel imgs={instaImgs}/>
-                    </Section>
-                    <Section title="Work Experiences">
-                        <Entry title="Software Intern" content="Remitly Seattle"/>
-                    </Section>
-                    <Section title="Projects" theme="gray">
-                        {projectEntries}
-                    </Section>
-                    <Section title="Resume">
-                        <button><h4 className="normal">Click to view</h4></button>
-                    </Section>
+                    <div className="home-container-content">
+                        <Intro id="intro-home">
+                            <h2 className="title intro-text">Luyao Hou</h2>
+                            <h5 className="intro-text">Hello</h5>
+                        </Intro>
+                        <Section title="Instagram" padding={false}>
+                            <Carousel imgs={instaImgs}/>
+                        </Section>
+                        <Section title="Work Experiences">
+                            <Entry title="Software Intern" content="Remitly Seattle"/>
+                        </Section>
+                        <Section title="Projects" theme="gray">
+                            {projectEntries}
+                        </Section>
+                        <Section title="Resume">
+                            <button><h4 className="normal">Click to view</h4></button>
+                        </Section>
+                    </div>
                 </div>
             </div>
         );

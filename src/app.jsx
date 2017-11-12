@@ -15,14 +15,19 @@ export default class App extends React.Component {
             screenInit: {
                 "Home": true,
             },
+            homePos: 0,
         };
     }
 
     render() {
+        const homeProps = {
+            homePos: this.state.homePos,
+            onRecordHomePos: this.handleRecordHomePos.bind(this),
+        };
         return (
             <div>
                 <Header onSwitchScreen={this.switchScreen.bind(this)}/>
-                {this.transitionify(Home, "Home")}
+                {this.transitionify(Home, "Home", homeProps)}
                 {this.transitionify(Work, "Work")}
             </div>
         );
@@ -36,6 +41,7 @@ export default class App extends React.Component {
                         transitionState={transitionState}
                         shouldDisplay={!!this.state.screenInit[label]}
                         onTransitionEnd={this.handleTransitionEnd.bind(this)}
+                        {...props}
                     />
                 )}
             </Transition>
@@ -56,6 +62,12 @@ export default class App extends React.Component {
         screens[this.state.screen] = true;
         this.setState({
             screenInit: screens,
+        });
+    }
+
+    handleRecordHomePos(pos) {
+        this.setState({
+            homePos: pos, 
         });
     }
 }
