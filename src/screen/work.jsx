@@ -18,12 +18,6 @@ export default class Work extends React.Component {
         }
     }
 
-    componentWillReceiveProps(nextProps) {
-        if (this.props.transitionState === "entered" && nextProps.transitionState === "exiting") {
-            window.scrollTo(0, 0);
-        }
-    }
-
     render() {
         if (!this.props.shouldDisplay) {
             return null;
@@ -42,24 +36,19 @@ export default class Work extends React.Component {
         ];
         return (
             <div className={`work-container work-container-${this.props.transitionState}`}>
-                <Intro id="intro-work">
-                    <h2 className="title intro-text">Internship</h2>
-                </Intro>
-                <Section title="Photos" padding={false}>
-                    <Carousel imgs={instaImgs}/>
-                </Section>
+                <div className="work-container-content">
+                    <Intro id="intro-work">
+                        <h2 className="title intro-text">Internship</h2>
+                    </Intro>
+                    <Section title="Photos" padding={false}>
+                        <Carousel imgs={instaImgs}/>
+                    </Section>
+                </div>
             </div>
         );
     }
 
     handleTransitionEnd() {
-        if (this.props.transitionState === "entered") {
-            const workContainers = document.getElementsByClassName("work-container");
-            if (workContainers != null && workContainers.length > 0) {
-                const workContainer = workContainers[0];
-                workContainer.classList.add("work-container-transition-complete");
-            }
-        }
         this.props.onTransitionEnd()
     }
 }

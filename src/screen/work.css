@@ -1,5 +1,6 @@
 .work-container {
     transition: top 500ms ease-in-out;
+    position: absolute;
     left: 0;
     right: 0;
     bottom: 0;
@@ -8,21 +9,17 @@
 }
 
 .work-container-entering {
-    position: fixed;
     top: 100%;
 }
 
-.work-container-entered:not(.work-container-transition-complete) {
+.work-container-entered {
     top: 0;
-    position: fixed;
 }
 
 .work-container-exiting {
     top: 0;
-    position: fixed;
 }
 
 .work-container-exited {
     top: 100%;
-    position: fixed;
 }

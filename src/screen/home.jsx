@@ -37,9 +37,7 @@ export default class Home extends React.Component {
             this.props.onRecordHomePos(-$(".home-container-content").first().offset().top);
         }
         if (nextProps.transitionState === "entering") {
-            $(".home-container").animate({
-                scrollTop: this.props.homePos, 
-            }, 100);
+            $(".home-container").scrollTop(this.props.homePos);
         }
     }
 
