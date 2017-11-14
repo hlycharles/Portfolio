@@ -4,23 +4,8 @@ import "./header.css";
 
 export default class Header extends React.Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            type: "full",
-        };
-    }
-
-    componentWillMount() {
-        this.checkWindowSize();
-    }
-
-    componentDidMount() {
-        window.addEventListener("resize", this.checkWindowSize.bind(this));
-    }
-
     render() {
-        return (this.state.type === "full") ? this.renderFullHeader() : this.renderLiteHeader();
+        return (this.props.renderType === "full") ? this.renderFullHeader() : this.renderLiteHeader();
     }
 
     renderFullHeader() {
@@ -68,12 +53,5 @@ export default class Header extends React.Component {
         return () => {
             this.props.onSwitchScreen(screen);
         }
-    }
-
-    checkWindowSize() {
-        const type = (window.innerWidth <= 992) ? "lite" : "full";
-        this.setState({
-            type: type,
-        });
     }
 }

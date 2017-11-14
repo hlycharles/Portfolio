@@ -40,6 +40,10 @@
 @media (max-width: 992px) {
     .header {
         justify-content: flex-start;
+        padding-top: 40px;
+        padding-bottom: 40px;
+        padding-left: 40px;
+        max-height: 150px;
     }
 
     .social-link {
@@ -58,6 +62,7 @@
 
     .page-link {
         text-align: left;
+        width: auto;
     }
 
     .page-btn:first-child {

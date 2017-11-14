@@ -16,17 +16,27 @@ export default class App extends React.Component {
                 "Home": true,
             },
             homePos: 0,
+            renderType: "full",
         };
+    }
+
+    componentWillMount() {
+        this.checkWindowSize();
+    }
+
+    componentDidMount() {
+        window.addEventListener("resize", this.checkWindowSize.bind(this));
     }
 
     render() {
         const homeProps = {
             homePos: this.state.homePos,
             onRecordHomePos: this.handleRecordHomePos.bind(this),
+            renderType: this.state.renderType,
         };
         return (
             <div>
-                <Header onSwitchScreen={this.switchScreen.bind(this)}/>
+                <Header onSwitchScreen={this.switchScreen.bind(this)} renderType={this.state.renderType}/>
                 {this.transitionify(Home, "Home", homeProps)}
                 {this.transitionify(Work, "Work")}
             </div>
@@ -68,6 +78,13 @@ export default class App extends React.Component {
     handleRecordHomePos(pos) {
         this.setState({
             homePos: pos, 
+        });
+    }
+
+    checkWindowSize() {
+        const type = (window.innerWidth <= 992) ? "lite" : "full";
+        this.setState({
+            renderType: type,
         });
     }
 }

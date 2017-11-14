@@ -91,13 +91,13 @@ export default class Home extends React.Component {
                         <Section title="Instagram" padding={false}>
                             <Carousel imgs={instaImgs}/>
                         </Section>
-                        <Section title="Work Experiences">
+                        <Section title="Work Experiences" theme="gray">
                             <Entry title="Software Intern" content="Remitly Seattle"/>
                         </Section>
-                        <Section title="Projects" theme="gray">
+                        <Section title="Projects">
                             {projectEntries}
                         </Section>
-                        <Section title="Resume">
+                        <Section title="Resume" theme="gray">
                             <button><h4 className="normal">Click to view</h4></button>
                         </Section>
                     </div>
