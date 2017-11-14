@@ -18,6 +18,25 @@ export default class Home extends React.Component {
         };
     }
 
+    componentDidMount() {
+        const uri = "https://api.instagram.com/v1/tags/nofilter/media/recent?access_token=247738439.1677ed0.64a10f284491469394a56afe85957451";
+        const xhr = new XMLHttpRequest();
+        xhr.open("GET", uri, true);
+        xhr.onload = () => {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    console.log(xhr.responseText);
+                } else {
+                    console.warn(xhr.statusText);
+                }
+            }
+        };
+        xhr.onerror = e => {
+            console.error(xhr.transitionState);
+        };
+        xhr.send();
+    }
+
     componentDidUpdate() {
         const overlays = document.getElementsByClassName("shadow-overlay");
         if (overlays.length > 0) {
