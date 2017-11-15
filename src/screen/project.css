@@ -1,0 +1,28 @@
+.project-container {
+    transition: top 500ms ease-in-out;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 50;
+    overflow-y: scroll;
+    background-color: white;
+    min-height: calc(100% - 140px);
+    padding-bottom: 140px;
+}
+
+.project-container-entering {
+    top: 100%;
+}
+
+.project-container-entered {
+    top: 0;
+}
+
+.project-container-exiting {
+    top: 0;
+}
+
+.project-container-exited {
+    top: 100%;
+}

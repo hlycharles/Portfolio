@@ -4,6 +4,7 @@ import Transition from "react-transition-group/Transition"
 import Header from "./component/header.jsx";
 import Home from "./screen/home.jsx";
 import Work from "./screen/work.jsx";
+import Project from "./screen/project.jsx";
 
 import "./base.css";
 
@@ -40,11 +41,16 @@ export default class App extends React.Component {
             onSwitchScreen: this.switchScreen.bind(this),
             work: this.state.subPage,
         };
+        const projectProps = {
+            onSwitchScreen: this.switchScreen.bind(this),
+            project: this.state.subPage,
+        }
         return (
             <div>
                 <Header onSwitchScreen={this.switchScreen.bind(this)} renderType={this.state.renderType}/>
                 {this.transitionify(Home, "Home", homeProps)}
                 {this.transitionify(Work, "Work", workProps)}
+                {this.transitionify(Project, "Project", projectProps)}
             </div>
         );
     }

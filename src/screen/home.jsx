@@ -100,7 +100,14 @@ export default class Home extends React.Component {
                 });
             }
             projects.push(
-                <Entry title={project.title} content={project.intro} name={project.name} imgs={icons} key={i} />,
+                <Entry 
+                    title={project.title}
+                    content={project.intro}
+                    name={project.name}
+                    imgs={icons}
+                    onClick={this.handleProjectClick(project).bind(this)}
+                    key={i}
+                />,
             );
         }     
         const works = [];
@@ -140,6 +147,12 @@ export default class Home extends React.Component {
     handleWorkClick(work) {
         return () => {
             this.props.onSwitchScreen("Work", work);
+        }
+    }
+
+    handleProjectClick(project) {
+        return () => {
+            this.props.onSwitchScreen("Project", project);
         }
     }
 

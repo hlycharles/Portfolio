@@ -56,7 +56,7 @@ function findProjectInformation(id, callback) {
     getInfo("languages", `/data/project/${id}/language.txt`, true);
     getInfo("imgs", `/data/project/${id}/img.txt`, true);
     getInfo("summary", `/data/project/${id}/summary.txt`);
-    getInfo("technology", `/data/project/${id}/technology.txt`, true);
+    getInfo("technology", `/data/project/${id}/technology.txt`);
 }
 
 export function getWork(callback) {
