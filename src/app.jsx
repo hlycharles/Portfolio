@@ -67,7 +67,7 @@ export default class App extends React.Component {
     switchScreen(screen, arg) {
         const screens = this.state.screenInit;
         screens[screen] = true;
-        if (screen === "Work") {
+        if (screen === "Work" || screen === "Project") {
             this.setState({
                 subPage: arg,
             });

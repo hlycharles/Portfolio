@@ -6,20 +6,57 @@ export function getProjectIcons(projectName) {
     return projectIcons;
 }
 
-export function getProjects() {
-    const projects = [
-        {
-            title: "iOS Reminder",
-            intro: "XCode",
-            name: "ios-reminder",
-        },
-        {
-            title: "Second",
-            intro: "Super code",
-            name: "name",
-        },
-    ];
-    return projects;
+export function getProjects(callback) {
+    const result = [];
+    let projectCount = 0;
+
+    function putProject(index, content) {
+        result[index] = content;
+        projectCount--;
+        if (projectCount === 0) {
+            callback(result);
+        }
+    }
+
+    function parseProject(content) {
+        const ids = content.split("\n");
+        for (let i = 0; i < ids.length; i++) {
+            result.push({});
+        }
+        projectCount = ids.length;
+        ids.forEach(id => {
+            findProjectInformation(id, putProject);
+        })
+    }
+    readFile("/data/project/id.txt", parseProject);
+}
+
+function findProjectInformation(id, callback) {
+    let project = {};
+    let fieldCount = 7;
+    function getInfo(key, path, shouldParse) {
+        readFile(path, r => {
+            let content = r;
+            if (shouldParse) {
+                content = r.split("\n");
+                if (content[0].length === 0) {
+                    content = [];
+                }
+            }
+            project[key] = content;
+            fieldCount--;
+            if (fieldCount === 0) {
+                callback(id, project);
+            }
+        });
+    }
+    getInfo("title", `/data/project/${id}/title.txt`);
+    getInfo("intro", `/data/project/${id}/intro.txt`);
+    getInfo("description", `/data/project/${id}/description.txt`);
+    getInfo("languages", `/data/project/${id}/language.txt`, true);
+    getInfo("imgs", `/data/project/${id}/img.txt`, true);
+    getInfo("summary", `/data/project/${id}/summary.txt`);
+    getInfo("technology", `/data/project/${id}/technology.txt`, true);
 }
 
 export function getWork(callback) {
@@ -46,7 +83,7 @@ export function getWork(callback) {
     readFile("/data/work/id.txt", parseWork);
 }
 
-export function findWorkInformation(id, callback) {
+function findWorkInformation(id, callback) {
     let work = {};
     let fieldCount = 5;
     function getInfo(key, path) {

@@ -44,13 +44,9 @@ export default class Entry extends React.Component {
     }
 
     parseImgs(props) {
-        const imgs = [];
-        if (props.name != null) {
-            const icons = getProjectIcons(props.name);
-            for (let i = 0; i < icons.length; i++) {
-                const icon = icons[i];
-                imgs.push(icon);
-            }
+        let imgs = [];
+        if (this.props.imgs != null) {
+            imgs = this.props.imgs;
         }
         this.setState({
             imgs: imgs,

@@ -6,6 +6,7 @@ import Section from "../component/section";
 import Entry from "../component/entry";
 import Carousel from "../component/carousel";
 import { getProjects, getWork } from "../util/data.js";
+import { LanguageIcon } from "../util/type.js";
 
 import "./home.css";
 
@@ -16,11 +17,18 @@ export default class Home extends React.Component {
         this.state = {
             showOverlay: false,
             works: [],
+            projects: [],
         };
     }
 
     componentWillMount() {
-        getWork((works) => {
+        getProjects(projects => {
+            this.setState({
+                projects: projects,
+            });
+        });
+
+        getWork(works => {
             this.setState({
                 works: works,
             });
@@ -80,12 +88,19 @@ export default class Home extends React.Component {
                 hwRatio: 1,
             },
         ];
-        const projects = getProjects();
-        const projectEntries = [];
-        for (let i = 0; i < projects.length; i++) {
-            const project = projects[i];
-            projectEntries.push(
-                <Entry title={project.title} content={project.intro} name={project.name} key={i} />,
+        const projects = [];
+        for (let i = 0; i < this.state.projects.length; i++) {
+            const project = this.state.projects[i];
+            let icons = [];
+            if (project.languages.length > 0) {
+                project.languages.forEach(l => {
+                    if (LanguageIcon[l] != null) {
+                        icons.push(`project/${LanguageIcon[l]}`);
+                    }
+                });
+            }
+            projects.push(
+                <Entry title={project.title} content={project.intro} name={project.name} imgs={icons} key={i} />,
             );
         }     
         const works = [];
@@ -111,7 +126,7 @@ export default class Home extends React.Component {
                             {works}
                         </Section>
                         <Section title="Projects">
-                            {projectEntries}
+                            {projects}
                         </Section>
                         <Section title="Resume" theme="gray">
                             <button><h4 className="normal">Click to view</h4></button>
