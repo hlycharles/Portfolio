@@ -34,11 +34,14 @@ export default class App extends React.Component {
             onRecordHomePos: this.handleRecordHomePos.bind(this),
             renderType: this.state.renderType,
         };
+        const workProps = {
+            onSwitchScreen: this.switchScreen.bind(this),
+        };
         return (
             <div>
                 <Header onSwitchScreen={this.switchScreen.bind(this)} renderType={this.state.renderType}/>
                 {this.transitionify(Home, "Home", homeProps)}
-                {this.transitionify(Work, "Work")}
+                {this.transitionify(Work, "Work", workProps)}
             </div>
         );
     }

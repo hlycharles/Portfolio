@@ -23,3 +23,19 @@
 .entry-img:not(:first-child) {
     margin-left: 50px;
 }
+
+@media (max-width: 992px) {
+    .entry-img {
+        width: 44px;
+        height: 44px;
+    }
+
+    .entry-title {
+        flex-direction: column;
+    }
+
+    .entry-imgs {
+        margin-bottom: 40px;
+        margin-left: 0;
+    }
+}

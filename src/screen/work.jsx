@@ -4,10 +4,18 @@ import $ from "jquery";
 import Intro from "../component/intro";
 import Section from "../component/section";
 import Carousel from '../component/carousel';
+import CloseBtn from "../component/closeBtn";
 
 import "./work.css";
 
 export default class Work extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            showCloseBtn: false,
+        };
+    }
 
     componentDidUpdate() {
         const containers = document.getElementsByClassName("work-container");
@@ -43,12 +51,25 @@ export default class Work extends React.Component {
                     <Section title="Photos" padding={false}>
                         <Carousel imgs={instaImgs}/>
                     </Section>
+                    {this.state.showCloseBtn && <CloseBtn onClick={this.handleCloseBtnClick.bind(this)}/>}
                 </div>
             </div>
         );
     }
 
     handleTransitionEnd() {
+        if (this.props.transitionState === "entered") {
+            this.setState({
+                showCloseBtn: true,
+            });
+        }
         this.props.onTransitionEnd()
+    }
+
+    handleCloseBtnClick() {
+        this.setState({
+            showCloseBtn: false,
+        });
+        this.props.onSwitchScreen("Home");
     }
 }
