@@ -15,7 +15,6 @@
 .entry-content {
     padding-right: 100px;
     font-weight: lighter;
-    font-size: 24px;
 }
 
 .entry-imgs {
@@ -35,15 +34,6 @@
 }
 
 @media (max-width: 992px) {
-    .entry:not(:last-child) {
-        margin-bottom: 80px;
-    }
-
-    .entry-img {
-        width: 44px;
-        height: 44px;
-    }
-
     .entry-title {
         flex-direction: column;
     }

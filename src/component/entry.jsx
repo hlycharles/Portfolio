@@ -28,15 +28,17 @@ export default class Entry extends React.Component {
         const titleElem = <h4 className="subtitle">{this.props.title}</h4>;
         return (
             <div className="entry">
-                <div className="entry-title">
-                    {
-                        this.props.onClick == null ?
-                        titleElem :
-                        <button onClick={this.props.onClick}>{titleElem}</button>
-                    }
-                    {imgs.length > 0 && <div className="entry-imgs">{imgs}</div>}
-                </div>
-                <h5 className="entry-content">{this.props.content}</h5>
+                {this.props.title != null && 
+                    <div className="entry-title">
+                        {
+                            this.props.onClick == null ?
+                            titleElem :
+                            <button onClick={this.props.onClick}>{titleElem}</button>
+                        }
+                        {imgs.length > 0 && <div className="entry-imgs">{imgs}</div>}
+                    </div>
+                }
+                <p className="entry-content">{this.props.content}</p>
             </div>
         );
     }

@@ -22,6 +22,11 @@ h5.intro-text {
 }
 
 @media (max-width: 992px) {
+    .intro-text {
+        margin-left: 40px;
+        margin-right: 40px;
+    }
+    
     .intro-wrapper {
         padding-top: 200px;
     }

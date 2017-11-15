@@ -3,6 +3,7 @@ import $ from "jquery";
 
 import Intro from "../component/intro";
 import Section from "../component/section";
+import Entry from "../component/entry";
 import Carousel from '../component/carousel';
 import CloseBtn from "../component/closeBtn";
 
@@ -29,19 +30,7 @@ export default class Work extends React.Component {
     render() {
         if (!this.props.shouldDisplay) {
             return null;
-        }
-        const instaImgs = [
-            {
-                src: "yosemite.jpg",
-                hwRatio: 1,
-            },{
-                src: "yosemite.jpg",
-                hwRatio: 1,
-            }, {
-                src: "yosemite.jpg",
-                hwRatio: 1,
-            },
-        ];
+        }        
         return (
             <div className={`work-container work-container-${this.props.transitionState}`}>
                 <div className="work-container-content">
@@ -49,8 +38,11 @@ export default class Work extends React.Component {
                         <h2 className="title intro-text">{this.props.work.title}</h2>
                         <h5 className="intro-text">{this.props.work.description}</h5>
                     </Intro>
-                    <Section title="Photos" padding={false}>
-                        <Carousel imgs={instaImgs}/>
+                    <Section title="Summary">
+                        <Entry content={this.props.work.summary} />
+                    </Section>
+                    <Section title="Technologies" theme="gray">
+                        <Entry content={this.props.work.technology} />
                     </Section>
                     {this.state.showCloseBtn && <CloseBtn onClick={this.handleCloseBtnClick.bind(this)}/>}
                 </div>

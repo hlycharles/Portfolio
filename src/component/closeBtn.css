@@ -23,15 +23,3 @@
     width: 30px;
     height: 30px;
 }
-
-@media (max-width: 992px) {
-    .close-btn {
-        width: 100px;
-        height: 100px;
-    }
-
-    .close-btn-img {
-        width: 60px;
-        height: 60px;
-    }
-}

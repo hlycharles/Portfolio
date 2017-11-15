@@ -15,3 +15,10 @@
 .section-gray {
     background-color: #fafafa;
 }
+
+@media (max-width: 992px) {
+    .section-pad,
+    .section-nopad > h3 {
+        padding-left: 40px;
+    }
+}
