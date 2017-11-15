@@ -1,7 +1,6 @@
 import React from "react";
 
 import "./entry.css";
-import { getProjectIcons } from "../util/data.js";
 
 export default class Entry extends React.Component {
 

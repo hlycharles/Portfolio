@@ -1,9 +1,5 @@
-export function getProjectIcons(projectName) {
-    const projectIcons = [
-        "yosemite.jpg",
-        "yosemite.jpg",
-    ];
-    return projectIcons;
+export function getIntro(callback) {
+    readFile("/data/intro.txt", callback);
 }
 
 export function getProjects(callback) {

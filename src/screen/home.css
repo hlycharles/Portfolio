@@ -1,6 +1,6 @@
 .home-container {
     transition: margin 500ms ease-in-out;
-    margin: 100px;
+    margin: 50px;
     position: absolute;
     top: 0;
     left: 0;
@@ -10,7 +10,7 @@
 }
 
 .home-container-exited {
-    margin: 100px;
+    margin: 50px;
 }
 
 .home-container-entered {

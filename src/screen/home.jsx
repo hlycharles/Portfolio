@@ -5,7 +5,7 @@ import Intro from "../component/intro";
 import Section from "../component/section";
 import Entry from "../component/entry";
 import Carousel from "../component/carousel";
-import { getProjects, getWork } from "../util/data.js";
+import { getIntro, getProjects, getWork } from "../util/data.js";
 import { LanguageIcon } from "../util/type.js";
 
 import "./home.css";
@@ -16,12 +16,19 @@ export default class Home extends React.Component {
         super(props);
         this.state = {
             showOverlay: false,
+            intro: "",
             works: [],
             projects: [],
         };
     }
 
     componentWillMount() {
+        getIntro(content => {
+            this.setState({
+                intro: content,
+            });
+        })
+
         getProjects(projects => {
             this.setState({
                 projects: projects,
@@ -124,10 +131,13 @@ export default class Home extends React.Component {
                     <div className="home-container-content">
                         <Intro id="intro-home">
                             <h2 className="title intro-text">Luyao Hou</h2>
-                            <h5 className="intro-text">Hello</h5>
+                            <h5 className="intro-text">{this.state.intro}</h5>
                         </Intro>
                         <Section title="Instagram" padding={false}>
                             <Carousel imgs={instaImgs}/>
+                            <button className="section-btn" onClick={this.handleInstaClick.bind(this)}>
+                                <h4>See more</h4>
+                            </button>
                         </Section>
                         <Section title="Work Experiences" theme="gray">
                             {works}
@@ -136,12 +146,16 @@ export default class Home extends React.Component {
                             {projects}
                         </Section>
                         <Section title="Resume" theme="gray">
-                            <button><h4 className="normal">Click to view</h4></button>
+                            <button onClick={this.handleResumeClick.bind(this)}><h4 className="normal">Press to view</h4></button>
                         </Section>
                     </div>
                 </div>
             </div>
         );
+    }
+
+    handleInstaClick() {
+        window.open("https://www.instagram.com/hlycharles/", "_blank");
     }
 
     handleWorkClick(work) {
@@ -154,6 +168,10 @@ export default class Home extends React.Component {
         return () => {
             this.props.onSwitchScreen("Project", project);
         }
+    }
+
+    handleResumeClick() {
+        window.open("/data/resume.pdf", "_blank");
     }
 
     handleAnimationEnd() {

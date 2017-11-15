@@ -12,7 +12,7 @@ export default class Header extends React.Component {
         return (
             <div className="header">
                 <div className="social-link">
-                    <button className="header-btn insta-btn">
+                    <button className="header-btn insta-btn" onClick={this.handleInstaClick.bind(this)}>
                         <img className="btn-img" src="asset/insta.png" />
                     </button>
                 </div>
@@ -34,7 +34,7 @@ export default class Header extends React.Component {
         return  (
             <div className="header">
                 <div className="social-link">
-                    <button className="header-btn insta-btn">
+                    <button className="header-btn insta-btn" onClick={this.handleInstaClick.bind(this)}>
                         <img className="btn-img" src="asset/insta.png" />
                     </button>
                 </div>
@@ -53,5 +53,9 @@ export default class Header extends React.Component {
         return () => {
             this.props.onSwitchScreen(screen);
         }
+    }
+
+    handleInstaClick() {
+        window.open("https://www.instagram.com/hlycharles/", "_blank");
     }
 }
