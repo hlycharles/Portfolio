@@ -25,13 +25,18 @@ export default class Entry extends React.Component {
         for (let i = 0; i < this.state.imgs.length; i++) {
             imgs.push(<img src={`asset/${this.state.imgs[i]}`} className="entry-img" key={i} />);
         }
+        const titleElem = <h4 className="subtitle">{this.props.title}</h4>;
         return (
             <div className="entry">
                 <div className="entry-title">
-                    <h4 className="subtitle">{this.props.title}</h4>
+                    {
+                        this.props.onClick == null ?
+                        titleElem :
+                        <button onClick={this.props.onClick}>{titleElem}</button>
+                    }
                     {imgs.length > 0 && <div className="entry-imgs">{imgs}</div>}
                 </div>
-                <h5>{this.props.content}</h5>
+                <h5 className="entry-content">{this.props.content}</h5>
             </div>
         );
     }

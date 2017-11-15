@@ -46,7 +46,8 @@ export default class Work extends React.Component {
             <div className={`work-container work-container-${this.props.transitionState}`}>
                 <div className="work-container-content">
                     <Intro id="intro-work">
-                        <h2 className="title intro-text">Internship</h2>
+                        <h2 className="title intro-text">{this.props.work.title}</h2>
+                        <h5 className="intro-text">{this.props.work.description}</h5>
                     </Intro>
                     <Section title="Photos" padding={false}>
                         <Carousel imgs={instaImgs}/>

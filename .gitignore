@@ -6,6 +6,7 @@ build/
 
 # assets
 asset
+data
 
 # os files
 .DS_Store

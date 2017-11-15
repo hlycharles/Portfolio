@@ -20,7 +20,7 @@ export default class Header extends React.Component {
                     <img className="btn-img" src="asset/home.png" />
                 </button>
                 <div className="page-link">
-                    <button className="page-btn" onClick={this.handleSwitchScreen("Work").bind(this)}>
+                    <button className="page-btn">
                         <h5>Work</h5>
                     </button>
                     <button className="page-btn"><h5>Projects</h5></button>
@@ -39,7 +39,7 @@ export default class Header extends React.Component {
                     </button>
                 </div>
                 <div className="page-link">
-                    <button className="page-btn" onClick={this.handleSwitchScreen("Work").bind(this)}>
+                    <button className="page-btn">
                         <h5>Work</h5>
                     </button>
                     <button className="page-btn"><h5>Projects</h5></button>

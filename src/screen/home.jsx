@@ -5,7 +5,7 @@ import Intro from "../component/intro";
 import Section from "../component/section";
 import Entry from "../component/entry";
 import Carousel from "../component/carousel";
-import { getProjects } from "../util/data.js";
+import { getProjects, getWork } from "../util/data.js";
 
 import "./home.css";
 
@@ -15,7 +15,16 @@ export default class Home extends React.Component {
         super(props);
         this.state = {
             showOverlay: false,
+            works: [],
         };
+    }
+
+    componentWillMount() {
+        getWork((works) => {
+            this.setState({
+                works: works,
+            });
+        });
     }
 
     componentDidUpdate() {
@@ -79,6 +88,13 @@ export default class Home extends React.Component {
                 <Entry title={project.title} content={project.intro} name={project.name} key={i} />,
             );
         }     
+        const works = [];
+        for (let i = 0; i < this.state.works.length; i++) {
+            const work = this.state.works[i];
+            works.push(
+                <Entry title={work.title} content={work.intro} onClick={this.handleWorkClick(work).bind(this)} key={i} />
+            );
+        }
         return (
             <div>
                 {overlay}
@@ -92,7 +108,7 @@ export default class Home extends React.Component {
                             <Carousel imgs={instaImgs}/>
                         </Section>
                         <Section title="Work Experiences" theme="gray">
-                            <Entry title="Software Intern" content="Remitly Seattle"/>
+                            {works}
                         </Section>
                         <Section title="Projects">
                             {projectEntries}
@@ -104,6 +120,12 @@ export default class Home extends React.Component {
                 </div>
             </div>
         );
+    }
+
+    handleWorkClick(work) {
+        return () => {
+            this.props.onSwitchScreen("Work", work);
+        }
     }
 
     handleAnimationEnd() {

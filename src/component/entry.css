@@ -1,11 +1,21 @@
 .entry:not(:last-child) {
-    margin-bottom: 30px;
+    margin-bottom: 40px;
 }
 
 .entry-title {
     display: flex;
     align-items: flex-start;
     padding-right: 100px;
+}
+
+.entry-title > button {
+    text-align: left;
+}
+
+.entry-content {
+    padding-right: 100px;
+    font-weight: lighter;
+    font-size: 24px;
 }
 
 .entry-imgs {
@@ -25,6 +35,10 @@
 }
 
 @media (max-width: 992px) {
+    .entry:not(:last-child) {
+        margin-bottom: 80px;
+    }
+
     .entry-img {
         width: 44px;
         height: 44px;

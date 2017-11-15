@@ -16,6 +16,7 @@ export default class App extends React.Component {
                 "Home": true,
             },
             homePos: 0,
+            subPage: {},
             renderType: "full",
         };
     }
@@ -33,9 +34,11 @@ export default class App extends React.Component {
             homePos: this.state.homePos,
             onRecordHomePos: this.handleRecordHomePos.bind(this),
             renderType: this.state.renderType,
+            onSwitchScreen: this.switchScreen.bind(this),
         };
         const workProps = {
             onSwitchScreen: this.switchScreen.bind(this),
+            work: this.state.subPage,
         };
         return (
             <div>
@@ -61,9 +64,14 @@ export default class App extends React.Component {
         );
     }
 
-    switchScreen(screen) {
+    switchScreen(screen, arg) {
         const screens = this.state.screenInit;
         screens[screen] = true;
+        if (screen === "Work") {
+            this.setState({
+                subPage: arg,
+            });
+        }
         this.setState({
             screen: screen,
             screenInit: screens,
