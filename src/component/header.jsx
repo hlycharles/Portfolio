@@ -20,11 +20,15 @@ export default class Header extends React.Component {
                     <img className="btn-img" src="asset/home.png" />
                 </button>
                 <div className="page-link">
-                    <button className="page-btn">
+                    <button className="page-btn" onClick={this.props.onShowWork}>
                         <h5>Work</h5>
                     </button>
-                    <button className="page-btn"><h5>Projects</h5></button>
-                    <button className="page-btn"><h5>Resume</h5></button>
+                    <button className="page-btn" onClick={this.props.onShowProject}>
+                        <h5>Projects</h5>
+                    </button>
+                    <button className="page-btn" onClick={this.handleResumeClick.bind(this)}>
+                        <h5>Resume</h5>
+                    </button>
                 </div>
             </div>
         );
@@ -39,11 +43,15 @@ export default class Header extends React.Component {
                     </button>
                 </div>
                 <div className="page-link">
-                    <button className="page-btn">
+                    <button className="page-btn" onClick={this.props.onShowWork}>
                         <h5>Work</h5>
                     </button>
-                    <button className="page-btn"><h5>Projects</h5></button>
-                    <button className="page-btn"><h5>Resume</h5></button>
+                    <button className="page-btn" onClick={this.props.onShowProject}>
+                        <h5>Projects</h5>
+                    </button>
+                    <button className="page-btn" onClick={this.handleResumeClick.bind(this)}>
+                        <h5>Resume</h5>
+                    </button>
                 </div>
             </div>
         );
@@ -57,5 +65,9 @@ export default class Header extends React.Component {
 
     handleInstaClick() {
         window.open("https://www.instagram.com/hlycharles/", "_blank");
+    }
+
+    handleResumeClick() {
+        window.open("/data/resume.pdf", "_blank");
     }
 }

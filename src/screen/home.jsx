@@ -23,23 +23,30 @@ export default class Home extends React.Component {
     }
 
     componentWillMount() {
-        getIntro(content => {
+        getIntro(intro => {
             this.setState({
-                intro: content,
+                intro: intro,
             });
+            this.registerSections();
         })
 
         getProjects(projects => {
             this.setState({
                 projects: projects,
             });
+            this.registerSections();
         });
 
         getWork(works => {
             this.setState({
                 works: works,
             });
+            this.registerSections();
         });
+    }
+
+    componentDidMount() {
+        this.registerSections();
     }
 
     componentDidUpdate() {
@@ -62,6 +69,10 @@ export default class Home extends React.Component {
         }
         if (nextProps.transitionState === "entering") {
             $(".home-container").scrollTop(this.props.homePos);
+        } else if (nextProps.homePos !== this.props.homePos && nextProps.homePos != null) {
+            $(".home-container").animate({
+                scrollTop: nextProps.homePos,
+            }, 500);
         }
     }
 
@@ -139,10 +150,10 @@ export default class Home extends React.Component {
                                 <h4>See more</h4>
                             </button>
                         </Section>
-                        <Section title="Work Experiences" theme="gray">
+                        <Section title="Work Experiences" theme="gray" id="Work">
                             {works}
                         </Section>
-                        <Section title="Projects">
+                        <Section title="Projects" id="Project">
                             {projects}
                         </Section>
                         <Section title="Resume" theme="gray">
@@ -151,6 +162,17 @@ export default class Home extends React.Component {
                     </div>
                 </div>
             </div>
+        );
+    }
+
+    registerSections() {
+        this.props.onRegisterHomeSection(
+            "Work",
+            $("#Work").position().top - 100,
+        );
+        this.props.onRegisterHomeSection(
+            "Project",
+            $("#Project").position().top - 100,
         );
     }
 

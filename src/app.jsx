@@ -1,5 +1,6 @@
 import React from "react";
 import Transition from "react-transition-group/Transition"
+import $ from "jquery";
 
 import Header from "./component/header.jsx";
 import Home from "./screen/home.jsx";
@@ -17,6 +18,7 @@ export default class App extends React.Component {
                 "Home": true,
             },
             homePos: 0,
+            homeSections: {},
             subPage: {},
             renderType: "full",
         };
@@ -34,8 +36,10 @@ export default class App extends React.Component {
         const homeProps = {
             homePos: this.state.homePos,
             onRecordHomePos: this.handleRecordHomePos.bind(this),
+            onRegisterHomeSection: this.handleRegisterHomeSection.bind(this),
             renderType: this.state.renderType,
             onSwitchScreen: this.switchScreen.bind(this),
+            onFinishShowSection: this.handleFinishShowSection.bind(this),
         };
         const workProps = {
             onSwitchScreen: this.switchScreen.bind(this),
@@ -47,7 +51,12 @@ export default class App extends React.Component {
         }
         return (
             <div>
-                <Header onSwitchScreen={this.switchScreen.bind(this)} renderType={this.state.renderType}/>
+                <Header 
+                    onSwitchScreen={this.switchScreen.bind(this)}
+                    renderType={this.state.renderType}
+                    onShowWork={this.handleShowSection("Work").bind(this)}
+                    onShowProject={this.handleShowSection("Project").bind(this)}
+                />
                 {this.transitionify(Home, "Home", homeProps)}
                 {this.transitionify(Work, "Work", workProps)}
                 {this.transitionify(Project, "Project", projectProps)}
@@ -68,6 +77,31 @@ export default class App extends React.Component {
                 )}
             </Transition>
         );
+    }
+
+    handleShowSection(section) {
+        return () => {
+            if ((!!this.state.screenInit.Work) || (!!this.state.screenInit.Project)) {
+                this.switchScreen("Home");
+            }
+            this.setState({
+                homePos: this.state.homeSections[section],
+            });
+        }
+    }
+
+    handleFinishShowSection() {
+        this.setState({
+            homeSection: null,
+        })
+    }
+
+    handleRegisterHomeSection(name, pos) {
+        const sections = this.state.homeSections;
+        sections[name] = pos;
+        this.setState({
+            homeSections: sections,
+        });
     }
 
     switchScreen(screen, arg) {
