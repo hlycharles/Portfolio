@@ -15,15 +15,21 @@ export default class Work extends React.Component {
         super(props);
         this.state = {
             showCloseBtn: false,
+            hasTransitionListener: false,
         };
     }
 
     componentDidUpdate() {
         const containers = document.getElementsByClassName("work-container");
-        if (containers.length > 0) {
+        if (containers.length > 0 && !this.state.hasTransitionListener) {
             containers[0].addEventListener("webkitTransitionEnd", this.handleTransitionEnd.bind(this), false);
             containers[0].addEventListener("transitionend", this.handleTransitionEnd.bind(this), false);
             containers[0].addEventListener("msTransitionEnd", this.handleTransitionEnd.bind(this), false);
+            if (this.props.transitionState !== "exiting" && this.props.transitionState !== "exited") {
+                this.setState({
+                    hasTransitionListener: true,
+                });
+            }
         }
     }
 
@@ -54,6 +60,10 @@ export default class Work extends React.Component {
         if (this.props.transitionState === "entered") {
             this.setState({
                 showCloseBtn: true,
+            });
+        } else if (this.props.transitionState === "exited") {
+            this.setState({
+                hasTransitionListener: false,
             });
         }
         this.props.onTransitionEnd()

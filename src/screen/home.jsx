@@ -16,6 +16,7 @@ export default class Home extends React.Component {
         super(props);
         this.state = {
             showOverlay: false,
+            hasOverlayListener: false,
             intro: "",
             works: [],
             projects: [],
@@ -56,10 +57,13 @@ export default class Home extends React.Component {
 
     componentDidUpdate() {
         const overlays = document.getElementsByClassName("shadow-overlay");
-        if (overlays.length > 0) {
+        if (overlays.length > 0 && !this.state.hasOverlayListener) {
             overlays[0].addEventListener("webkitAnimationEnd", this.handleAnimationEnd.bind(this), false);
             overlays[0].addEventListener("animationend", this.handleAnimationEnd.bind(this), false);
             overlays[0].addEventListener("msAnimationEnd", this.handleAnimationEnd.bind(this), false);
+            this.setState({
+                hasOverlayListener: true,
+            });
         }
     }
 
@@ -208,6 +212,7 @@ export default class Home extends React.Component {
     handleAnimationEnd() {
         this.setState({
             showOverlay: false,
+            hasOverlayListener: false,
         });
     }
 }
