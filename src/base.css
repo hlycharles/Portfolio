@@ -57,6 +57,11 @@ p {
     margin-bottom: 20px;
 }
 
+button:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
 @media (max-width: 992px) {
     h2 {
         font-size: 50px;

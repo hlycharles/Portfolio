@@ -34,9 +34,10 @@ export default class Project extends React.Component {
         const imgs = [];
         if (this.props.project.imgs.length > 0) {
             this.props.project.imgs.forEach(img =>{
+                const imgInfo = img.split("&");
                 imgs.push({
-                    src: img,
-                    hwRatio: 1,
+                    src: `project/${this.props.project.id}/${imgInfo[0]}`,
+                    hwRatio: parseFloat(imgInfo[1]),
                 });
             })
         }
@@ -49,7 +50,7 @@ export default class Project extends React.Component {
                     </Intro>
                     {
                         imgs.length > 0 &&
-                        <Section theme="gray"><Carousel imgs={imgs} /></Section>
+                        <Section theme="gray" padding={false}><Carousel imgs={imgs} /></Section>
                     }
                     <Section title="Summary">
                         <Entry content={this.props.project.summary} />

@@ -28,13 +28,15 @@ export function getProjects(callback) {
 }
 
 function findProjectInformation(id, callback) {
-    let project = {};
+    let project = {
+        id: id,
+    };
     let fieldCount = 7;
     function getInfo(key, path, shouldParse) {
         readFile(path, r => {
             let content = r;
             if (shouldParse) {
-                content = r.split("\n");
+                content = r.split("#");
                 if (content[0].length === 0) {
                     content = [];
                 }

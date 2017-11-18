@@ -10,6 +10,7 @@
 
 .entry-title > button {
     text-align: left;
+    width: 45%;
 }
 
 .entry-content {
@@ -26,6 +27,7 @@
 .entry-img {
     width: 30px;
     height: 30px;
+    border-radius: 5px;
     object-fit: contain;
 }
 
@@ -38,8 +40,16 @@
         flex-direction: column;
     }
 
+    .entry-title > button {
+        width: auto;
+    }
+
     .entry-imgs {
-        margin-bottom: 40px;
+        margin-bottom: 20px;
         margin-left: 0;
+    }
+
+    .entry-img:not(:first-child) {
+        margin-left: 30px;
     }
 }
