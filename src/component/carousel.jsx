@@ -7,6 +7,29 @@ import Section from "./section";
 export default class Carousel extends React.Component {
 
     componentDidMount() {
+        this.setImgSize();
+        window.addEventListener("resize", this.handleResize.bind(this));
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener("resize", this.handleResize.bind(this));
+    }
+
+    render() {
+        if (this.props.imgs == null || this.props.imgs.length == 0) {
+            return null;
+        }
+        const imgs = [];
+        for (let i = 0; i < this.props.imgs.length; i++) {
+            const img = this.props.imgs[i];
+            imgs.push(<img src={`asset/${img.src}`} className="carousel-img" key={i} />);
+        }
+        return (
+            <div className="carousel">{imgs}</div>
+        );
+    }
+
+    setImgSize() {
         const imgs = this.props.imgs;
         if (imgs.length == 0) {
             return;
@@ -30,17 +53,7 @@ export default class Carousel extends React.Component {
         }
     }
 
-    render() {
-        if (this.props.imgs == null || this.props.imgs.length == 0) {
-            return null;
-        }
-        const imgs = [];
-        for (let i = 0; i < this.props.imgs.length; i++) {
-            const img = this.props.imgs[i];
-            imgs.push(<img src={`asset/${img.src}`} className="carousel-img" key={i} />);
-        }
-        return (
-            <div className="carousel">{imgs}</div>
-        );
+    handleResize() {
+        this.setImgSize();
     }
 }

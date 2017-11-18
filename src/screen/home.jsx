@@ -47,6 +47,11 @@ export default class Home extends React.Component {
 
     componentDidMount() {
         this.registerSections();
+        $(window).resize(this.handleResize.bind(this));
+    }
+
+    componentWillUnmount() {
+        $(window).off("resize", this.handleResize.bind(this));
     }
 
     componentDidUpdate() {
@@ -174,6 +179,10 @@ export default class Home extends React.Component {
             "Project",
             $("#Project").position().top - 100,
         );
+    }
+
+    handleResize() {
+        this.registerSections();
     }
 
     handleInstaClick() {
