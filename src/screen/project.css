@@ -1,4 +1,4 @@
-.work-container {
+.project-container {
     transition: top 500ms ease-in-out;
     position: absolute;
     left: 0;
@@ -11,18 +11,18 @@
     padding-bottom: 140px;
 }
 
-.work-container-entering {
+.project-container-entering {
     top: 100%;
 }
 
-.work-container-entered {
+.project-container-entered {
     top: 0;
 }
 
-.work-container-exiting {
+.project-container-exiting {
     top: 0;
 }
 
-.work-container-exited {
+.project-container-exited {
     top: 100%;
 }

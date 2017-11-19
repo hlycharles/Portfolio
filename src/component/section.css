@@ -4,8 +4,13 @@
 
 .section-pad,
 /* always pad section titles */
-.section-nopad > h3 {
+.section-nopad > h3,
+.section-btn {
     padding-left: 100px;
+}
+
+.section-btn {
+    padding-top: 40px;
 }
 
 .section-white {
@@ -14,4 +19,12 @@
 
 .section-gray {
     background-color: #fafafa;
+}
+
+@media (max-width: 992px) {
+    .section-pad,
+    .section-nopad > h3,
+    .section-btn {
+        padding-left: 40px;
+    }
 }

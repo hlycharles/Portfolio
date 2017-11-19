@@ -11,10 +11,12 @@ button {
 h2,
 h3,
 h4,
-h5 {
+h5,
+p {
     font-family: Helvetica, sans-serif;
     color: #4c4c4c;
     margin: 0;
+    white-space: pre-wrap;
 }
 
 h2 {
@@ -37,6 +39,12 @@ h5 {
     font-size: 16px;
 }
 
+p {
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 1.8;
+}
+
 .normal {
     font-weight: normal;
 }
@@ -46,5 +54,37 @@ h5 {
 }
 
 .subtitle {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
+}
+
+button:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+@media (max-width: 992px) {
+    h2 {
+        font-size: 50px;
+    }
+
+    h3 {
+        font-size: 32px;
+    }
+
+    h4 {
+        font-size: 22px;
+    }
+
+    h5 {
+        font-size: 16px;
+    }
+
+    p {
+        font-size: 20px;
+        line-height: 1.5;
+    }
+
+    .subtitle {
+        margin-bottom: 15px;
+    }
 }

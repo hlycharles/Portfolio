@@ -1,6 +1,6 @@
 .home-container {
     transition: margin 500ms ease-in-out;
-    margin: 100px;
+    margin: 0 10px;
     position: absolute;
     top: 0;
     left: 0;
@@ -10,7 +10,7 @@
 }
 
 .home-container-exited {
-    margin: 100px;
+    margin: 0 10px;
 }
 
 .home-container-entered {
@@ -28,11 +28,13 @@
 
 .shadow-overlay-enter {
     animation: fadein 500ms forwards;
+    -webkit-animation: fadein 500ms forwards;
 }
 
 .shadow-overlay-exit {
     background-color: rgba(0, 0, 0, 0.5);
     animation: fadeout 500ms forwards;
+    -webkit-animation: fadeout 500ms forwards;
 }
 
 @keyframes fadein {

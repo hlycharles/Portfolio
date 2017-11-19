@@ -36,3 +36,38 @@
 .page-btn:not(:last-child) {
     margin-right: 30px;
 }
+
+@media (max-width: 992px) {
+    .header {
+        justify-content: flex-start;
+        padding-left: 40px;
+        max-height: 150px;
+    }
+
+    .social-link {
+        width: auto;
+    }
+
+    .header-btn {
+        width: 44px;
+        height: 44px;
+    }
+
+    .btn-img {
+        width: 40px;
+        height: 40px;
+    }
+
+    .page-link {
+        text-align: left;
+        width: auto;
+    }
+
+    .page-btn:first-child {
+        margin-left: 40px;
+    }
+
+    .page-btn:not(:last-child) {
+        margin-right: 40px;
+    }
+}

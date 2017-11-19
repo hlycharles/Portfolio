@@ -1,9 +1,11 @@
 import React from "react";
 import Transition from "react-transition-group/Transition"
+import $ from "jquery";
 
 import Header from "./component/header.jsx";
 import Home from "./screen/home.jsx";
 import Work from "./screen/work.jsx";
+import Project from "./screen/project.jsx";
 
 import "./base.css";
 
@@ -16,19 +18,48 @@ export default class App extends React.Component {
                 "Home": true,
             },
             homePos: 0,
+            homeSections: {},
+            subPage: {},
+            renderType: "full",
         };
+    }
+
+    componentWillMount() {
+        this.checkWindowSize();
+    }
+
+    componentDidMount() {
+        window.addEventListener("resize", this.checkWindowSize.bind(this));
     }
 
     render() {
         const homeProps = {
             homePos: this.state.homePos,
             onRecordHomePos: this.handleRecordHomePos.bind(this),
+            onRegisterHomeSection: this.handleRegisterHomeSection.bind(this),
+            renderType: this.state.renderType,
+            onSwitchScreen: this.switchScreen.bind(this),
+            onFinishShowSection: this.handleFinishShowSection.bind(this),
         };
+        const workProps = {
+            onSwitchScreen: this.switchScreen.bind(this),
+            work: this.state.subPage,
+        };
+        const projectProps = {
+            onSwitchScreen: this.switchScreen.bind(this),
+            project: this.state.subPage,
+        }
         return (
             <div>
-                <Header onSwitchScreen={this.switchScreen.bind(this)}/>
+                <Header 
+                    onSwitchScreen={this.switchScreen.bind(this)}
+                    renderType={this.state.renderType}
+                    onShowWork={this.handleShowSection("Work").bind(this)}
+                    onShowProject={this.handleShowSection("Project").bind(this)}
+                />
                 {this.transitionify(Home, "Home", homeProps)}
-                {this.transitionify(Work, "Work")}
+                {this.transitionify(Work, "Work", workProps)}
+                {this.transitionify(Project, "Project", projectProps)}
             </div>
         );
     }
@@ -48,9 +79,39 @@ export default class App extends React.Component {
         );
     }
 
-    switchScreen(screen) {
+    handleShowSection(section) {
+        return () => {
+            if ((!!this.state.screenInit.Work) || (!!this.state.screenInit.Project)) {
+                this.switchScreen("Home");
+            }
+            this.setState({
+                homePos: this.state.homeSections[section],
+            });
+        }
+    }
+
+    handleFinishShowSection() {
+        this.setState({
+            homeSection: null,
+        })
+    }
+
+    handleRegisterHomeSection(name, pos) {
+        const sections = this.state.homeSections;
+        sections[name] = pos;
+        this.setState({
+            homeSections: sections,
+        });
+    }
+
+    switchScreen(screen, arg) {
         const screens = this.state.screenInit;
         screens[screen] = true;
+        if (screen === "Work" || screen === "Project") {
+            this.setState({
+                subPage: arg,
+            });
+        }
         this.setState({
             screen: screen,
             screenInit: screens,
@@ -68,6 +129,13 @@ export default class App extends React.Component {
     handleRecordHomePos(pos) {
         this.setState({
             homePos: pos, 
+        });
+    }
+
+    checkWindowSize() {
+        const type = (window.innerWidth <= 992) ? "lite" : "full";
+        this.setState({
+            renderType: type,
         });
     }
 }

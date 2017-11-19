@@ -7,25 +7,12 @@ import Section from "./section";
 export default class Carousel extends React.Component {
 
     componentDidMount() {
-        const imgs = this.props.imgs;
-        if (imgs.length == 0) {
-            return;
-        }
-        // calculate the maximum height needed
-        const w = window.innerWidth;
-        const imgW = w * 0.35;
-        let imgH = -1;
-        for (let i = 0; i < imgs.length; i++) {
-            const h = imgW * imgs[i].hwRatio;
-            if (h > imgH) {
-                imgH = h;
-            }
-        }
-        const imgElems = document.getElementsByClassName("carousel-img");
-        for (let i = 0; i < imgElems.length; i++) {
-            imgElems[i].style.width = `${imgW}px`;
-            imgElems[i].style.height = `${imgH}px`;
-        }
+        this.setImgSize();
+        window.addEventListener("resize", this.handleResize.bind(this));
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener("resize", this.handleResize.bind(this));
     }
 
     render() {
@@ -40,5 +27,33 @@ export default class Carousel extends React.Component {
         return (
             <div className="carousel">{imgs}</div>
         );
+    }
+
+    setImgSize() {
+        const imgs = this.props.imgs;
+        if (imgs.length == 0) {
+            return;
+        }
+        // calculate maximum height width ratio
+        let maxHwRatio = -1;
+        for (let i = 0; i < imgs.length; i++) {
+            if (imgs[i].hwRatio > maxHwRatio) {
+                maxHwRatio = imgs[i].hwRatio;
+            }
+        }
+        // calculate the maximum height needed
+        const w = window.innerWidth;
+        const imgW = (maxHwRatio >= 1.5) ? w * 0.3 : w * 0.35;
+        const imgH = imgW * maxHwRatio;
+
+        const imgElems = document.getElementsByClassName("carousel-img");
+        for (let i = 0; i < imgElems.length; i++) {
+            imgElems[i].style.width = `${imgW}px`;
+            imgElems[i].style.height = `${imgH}px`;
+        }
+    }
+
+    handleResize() {
+        this.setImgSize();
     }
 }

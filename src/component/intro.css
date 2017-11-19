@@ -4,6 +4,7 @@
     align-items: flex-end;
     padding-bottom: 50px;
     background-color: #fafafa;
+    padding-top: 20%;
 }
 
 .intro {
@@ -13,6 +14,25 @@
 
 .intro-text {
     margin-left: 100px;
+    margin-right: 100px;
 }
 
+h5.intro-text {
+    font-weight: lighter;
+    font-size: 24px;
+}
 
+@media (max-width: 992px) {
+    .intro-text {
+        margin-left: 40px;
+        margin-right: 40px;
+    }
+
+    h5.intro-text {
+        font-size: 18px;
+    }
+    
+    .intro-wrapper {
+        padding-top: 200px;
+    }
+}

@@ -1,11 +1,21 @@
 .entry:not(:last-child) {
-    margin-bottom: 30px;
+    margin-bottom: 40px;
 }
 
 .entry-title {
     display: flex;
     align-items: flex-start;
     padding-right: 100px;
+}
+
+.entry-title > button {
+    text-align: left;
+    width: 45%;
+}
+
+.entry-content {
+    padding-right: 100px;
+    font-weight: lighter;
 }
 
 .entry-imgs {
@@ -17,9 +27,29 @@
 .entry-img {
     width: 30px;
     height: 30px;
+    border-radius: 5px;
     object-fit: contain;
 }
 
 .entry-img:not(:first-child) {
     margin-left: 50px;
+}
+
+@media (max-width: 992px) {
+    .entry-title {
+        flex-direction: column;
+    }
+
+    .entry-title > button {
+        width: auto;
+    }
+
+    .entry-imgs {
+        margin-bottom: 15px;
+        margin-left: 0;
+    }
+
+    .entry-img:not(:first-child) {
+        margin-left: 30px;
+    }
 }
