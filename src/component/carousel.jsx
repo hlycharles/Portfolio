@@ -7,12 +7,16 @@ import Section from "./section";
 export default class Carousel extends React.Component {
 
     componentDidMount() {
-        this.setImgSize();
+        this.setImgSize(this.props.imgs);
         window.addEventListener("resize", this.handleResize.bind(this));
     }
 
     componentWillUnmount() {
         window.removeEventListener("resize", this.handleResize.bind(this));
+    }
+
+    componentDidUpdate() {
+        this.setImgSize(this.props.imgs);
     }
 
     render() {
@@ -22,15 +26,15 @@ export default class Carousel extends React.Component {
         const imgs = [];
         for (let i = 0; i < this.props.imgs.length; i++) {
             const img = this.props.imgs[i];
-            imgs.push(<img src={`asset/${img.src}`} className="carousel-img" key={i} />);
+            const uri = (!!img.isUrl) ? img.src : `asset/${img.src}`;
+            imgs.push(<img src={uri} className="carousel-img" key={i} />);
         }
         return (
             <div className="carousel">{imgs}</div>
         );
     }
 
-    setImgSize() {
-        const imgs = this.props.imgs;
+    setImgSize(imgs) {
         if (imgs.length == 0) {
             return;
         }
@@ -43,7 +47,13 @@ export default class Carousel extends React.Component {
         }
         // calculate the maximum height needed
         const w = window.innerWidth;
-        const imgW = (maxHwRatio >= 1.5) ? w * 0.3 : w * 0.35;
+
+        let imgW = 200;
+        if (this.props.renderType == null || this.props.renderType === "full") {
+            imgW = (maxHwRatio >= 1.5) ? w * 0.3 : w * 0.35;
+        } else {
+            imgW = (maxHwRatio >= 1.5) ? w * 0.5 : w * 0.6;
+        }
         const imgH = imgW * maxHwRatio;
 
         const imgElems = document.getElementsByClassName("carousel-img");
@@ -54,6 +64,6 @@ export default class Carousel extends React.Component {
     }
 
     handleResize() {
-        this.setImgSize();
+        this.setImgSize(this.props.imgs);
     }
 }

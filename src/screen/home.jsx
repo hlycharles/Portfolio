@@ -10,6 +10,8 @@ import { LanguageIcon } from "../util/type.js";
 
 import "./home.css";
 
+const instagramCount = 3;
+
 export default class Home extends React.Component {
 
     constructor(props) {
@@ -20,6 +22,7 @@ export default class Home extends React.Component {
             intro: "",
             works: [],
             projects: [],
+            instagramImgs: [],
         };
     }
 
@@ -49,6 +52,7 @@ export default class Home extends React.Component {
     componentDidMount() {
         this.registerSections();
         $(window).resize(this.handleResize.bind(this));
+        this.requestInstagram();
     }
 
     componentWillUnmount() {
@@ -102,19 +106,8 @@ export default class Home extends React.Component {
                 );
             }
         }
-        // instagram images
-        const instaImgs = [
-            {
-                src: "yosemite.jpg",
-                hwRatio: 1,
-            },{
-                src: "yosemite.jpg",
-                hwRatio: 1,
-            }, {
-                src: "yosemite.jpg",
-                hwRatio: 1,
-            },
-        ];
+
+        // project elements
         const projects = [];
         for (let i = 0; i < this.state.projects.length; i++) {
             const project = this.state.projects[i];
@@ -136,7 +129,9 @@ export default class Home extends React.Component {
                     key={i}
                 />,
             );
-        }     
+        }
+        
+        // work elements
         const works = [];
         for (let i = 0; i < this.state.works.length; i++) {
             const work = this.state.works[i];
@@ -154,7 +149,7 @@ export default class Home extends React.Component {
                             <h5 className="intro-text">{this.state.intro}</h5>
                         </Intro>
                         <Section title="Instagram" padding={false}>
-                            <Carousel imgs={instaImgs}/>
+                            <Carousel imgs={this.state.instagramImgs} renderType={this.props.renderType}/>
                             <button className="section-btn" onClick={this.handleInstaClick.bind(this)}>
                                 <h4>See more</h4>
                             </button>
@@ -174,14 +169,30 @@ export default class Home extends React.Component {
         );
     }
 
+    handleInstagramResponse(response) {
+        const data = response.data;
+        const imgs = [];
+        data.forEach(d => {
+            const img = d.images["standard_resolution"];
+            imgs.push({
+                src: img.url,
+                hwRatio: img.height / img.width,
+                isUrl: true,
+            });
+        })
+        this.setState({
+            instagramImgs: imgs,
+        });
+    }
+
     requestInstagram() {
-        const uri = "https://api.instagram.com/v1/tags/nofilter/media/recent?access_token=247738439.1677ed0.64a10f284491469394a56afe85957451";
+        const uri = `https://api.instagram.com/v1/users/self/media/recent?access_token=247738439.1677ed0.64a10f284491469394a56afe85957451&count=${instagramCount}`;
         const xhr = new XMLHttpRequest();
         xhr.open("GET", uri, true);
         xhr.onload = () => {
             if (xhr.readyState === 4) {
                 if (xhr.status === 200) {
-                    console.log(xhr.responseText);
+                    this.handleInstagramResponse(JSON.parse(xhr.responseText));
                 } else {
                     console.warn(xhr.statusText);
                 }
@@ -194,14 +205,18 @@ export default class Home extends React.Component {
     }
 
     registerSections() {
-        this.props.onRegisterHomeSection(
-            "Work",
-            $("#Work").position().top - 100,
-        );
-        this.props.onRegisterHomeSection(
-            "Project",
-            $("#Project").position().top - 100,
-        );
+        if ($("#Work").position() != null) {
+            this.props.onRegisterHomeSection(
+                "Work",
+                $("#Work").position().top - 100,
+            );
+        }
+        if ($("#Project").position() != null) {
+            this.props.onRegisterHomeSection(
+                "Project",
+                $("#Project").position().top - 100,
+            );
+        }
     }
 
     handleResize() {

@@ -44,10 +44,12 @@ export default class App extends React.Component {
         const workProps = {
             onSwitchScreen: this.switchScreen.bind(this),
             work: this.state.subPage,
+            renderType: this.state.renderType,
         };
         const projectProps = {
             onSwitchScreen: this.switchScreen.bind(this),
             project: this.state.subPage,
+            renderType: this.state.renderType,
         }
         return (
             <div>
