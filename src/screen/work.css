@@ -9,6 +9,7 @@
     background-color: white;
     min-height: calc(100% - 140px);
     padding-bottom: 140px;
+    -webkit-overflow-scrolling: touch;
 }
 
 .work-container-entering {
