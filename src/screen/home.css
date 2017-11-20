@@ -1,6 +1,4 @@
 .home-container {
-    transition: margin 500ms ease-in-out;
-    margin: 0 10px;
     position: absolute;
     top: 0;
     left: 0;
@@ -10,16 +8,8 @@
     -webkit-overflow-scrolling: touch;
 }
 
-.home-container-exited {
-    margin: 0 10px;
-}
-
-.home-container-entered {
-    margin: 0;
-}
-
 .shadow-overlay {
-    position: absolute;
+    position: fixed;
     top: 0;
     bottom: 0;
     left: 0;

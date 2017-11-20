@@ -18,7 +18,7 @@ export default class App extends React.Component {
                 "Home": true,
             },
             homePos: 0,
-            homeSections: {},
+            homeSection: null,
             subPage: {},
             renderType: "full",
         };
@@ -36,7 +36,8 @@ export default class App extends React.Component {
         const homeProps = {
             homePos: this.state.homePos,
             onRecordHomePos: this.handleRecordHomePos.bind(this),
-            onRegisterHomeSection: this.handleRegisterHomeSection.bind(this),
+            homeSection: this.state.homeSection,
+            onFinishShowSection: this.handleFinishShowSection.bind(this),
             renderType: this.state.renderType,
             onSwitchScreen: this.switchScreen.bind(this),
             onFinishShowSection: this.handleFinishShowSection.bind(this),
@@ -87,7 +88,7 @@ export default class App extends React.Component {
                 this.switchScreen("Home");
             }
             this.setState({
-                homePos: this.state.homeSections[section],
+                homeSection: section,
             });
         }
     }
@@ -96,14 +97,6 @@ export default class App extends React.Component {
         this.setState({
             homeSection: null,
         })
-    }
-
-    handleRegisterHomeSection(name, pos) {
-        const sections = this.state.homeSections;
-        sections[name] = pos;
-        this.setState({
-            homeSections: sections,
-        });
     }
 
     switchScreen(screen, arg) {

@@ -18,7 +18,6 @@ export default class Home extends React.Component {
         super(props);
         this.state = {
             showOverlay: false,
-            hasOverlayListener: false,
             intro: "",
             works: [],
             projects: [],
@@ -31,27 +30,22 @@ export default class Home extends React.Component {
             this.setState({
                 intro: intro,
             });
-            this.registerSections();
         })
 
         getProjects(projects => {
             this.setState({
                 projects: projects,
             });
-            this.registerSections();
         });
 
         getWork(works => {
             this.setState({
                 works: works,
             });
-            this.registerSections();
         });
     }
 
     componentDidMount() {
-        this.registerSections();
-        $(window).resize(this.handleResize.bind(this));
         this.requestInstagram();
     }
 
@@ -61,13 +55,10 @@ export default class Home extends React.Component {
 
     componentDidUpdate() {
         const overlays = document.getElementsByClassName("shadow-overlay");
-        if (overlays.length > 0 && !this.state.hasOverlayListener) {
+        if (overlays.length > 0) {
             overlays[0].addEventListener("webkitAnimationEnd", this.handleAnimationEnd.bind(this), false);
             overlays[0].addEventListener("animationend", this.handleAnimationEnd.bind(this), false);
             overlays[0].addEventListener("msAnimationEnd", this.handleAnimationEnd.bind(this), false);
-            this.setState({
-                hasOverlayListener: true,
-            });
         }
     }
 
@@ -82,10 +73,11 @@ export default class Home extends React.Component {
         }
         if (nextProps.transitionState === "entering") {
             $(".home-container").scrollTop(this.props.homePos);
-        } else if (nextProps.homePos !== this.props.homePos && nextProps.homePos != null) {
+        } else if (nextProps.homeSection !== this.props.homeSection && nextProps.homeSection != null) {
+            const currScroll = $(".home-container").first().scrollTop();
             $(".home-container").animate({
-                scrollTop: nextProps.homePos,
-            }, 500);
+                scrollTop: currScroll + $(`#${nextProps.homeSection}`).position().top - 100,
+            }, 500, this.props.onFinishShowSection);
         }
     }
 
@@ -207,25 +199,6 @@ export default class Home extends React.Component {
         xhr.send();
     }
 
-    registerSections() {
-        if ($("#Work").position() != null) {
-            this.props.onRegisterHomeSection(
-                "Work",
-                $("#Work").position().top - 100,
-            );
-        }
-        if ($("#Project").position() != null) {
-            this.props.onRegisterHomeSection(
-                "Project",
-                $("#Project").position().top - 100,
-            );
-        }
-    }
-
-    handleResize() {
-        this.registerSections();
-    }
-
     handleInstaClick() {
         window.open("https://www.instagram.com/hlycharles/", "_blank");
     }
@@ -249,7 +222,6 @@ export default class Home extends React.Component {
     handleAnimationEnd() {
         this.setState({
             showOverlay: false,
-            hasOverlayListener: false,
         });
     }
 }
