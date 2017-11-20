@@ -1,0 +1,1 @@
+I worked with Qt and OpenCV to develop tracking systems that support target counting and path tracing.

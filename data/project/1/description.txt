@@ -1,0 +1,1 @@
+A key value storage system based on RPC that supports multiple client facing servers and storage servers.

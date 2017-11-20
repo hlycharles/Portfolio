@@ -1,0 +1,5 @@
+Firebase
+React
+Electron
+Javascript
+Objective-C
