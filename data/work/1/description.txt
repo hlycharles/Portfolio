@@ -1,0 +1,1 @@
+I worked with React and Typescript to develop part of the company's website. I also worked with Kotlin for some API support.

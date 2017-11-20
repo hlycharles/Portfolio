@@ -1,0 +1,1 @@
+I mainly worked on iOS development with ObjC and desktop app development with Firebase and Electron.

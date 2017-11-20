@@ -1,0 +1,4 @@
+OpenCV
+Qt
+C++
+Java(Android)

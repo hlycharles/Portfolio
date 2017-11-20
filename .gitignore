@@ -4,9 +4,5 @@ node_modules/
 # built files
 build/
 
-# assets
-asset
-data
-
 # os files
 .DS_Store

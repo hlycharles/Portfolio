@@ -1,0 +1,5 @@
+I developed this project as my final project for an introductory CS class at Carnegie Mellon during my freshman year. The idea of the game is to provide users with as many customization as possible. For example, the user can decide which game props to use and what colors are assigned to each of them. They can set their profile image with built in image editing tools like crop, draw and flip. Users can also edit each half of the table independently by its position and size.
+
+With this project I also tried the OpenCV library as a method to enter the game. In particular, the program tries to detect user's eyes at start and user can enter the game by nodding their head.
+
+Youtube link: https://www.youtube.com/watch?v=50yhR9Cu_3Y
