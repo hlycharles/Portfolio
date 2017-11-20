@@ -149,7 +149,10 @@ export default class Home extends React.Component {
                             <h5 className="intro-text">{this.state.intro}</h5>
                         </Intro>
                         <Section title="Instagram" padding={false}>
-                            <Carousel imgs={this.state.instagramImgs} renderType={this.props.renderType}/>
+                            <Carousel 
+                                imgs={this.state.instagramImgs}
+                                renderType={this.props.renderType}
+                            />
                             <button className="section-btn" onClick={this.handleInstaClick.bind(this)}>
                                 <h4>See more</h4>
                             </button>

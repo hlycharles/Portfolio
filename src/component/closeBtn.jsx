@@ -7,7 +7,7 @@ export default class CloseBtn extends React.Component {
         return (
             <div className="close-btn-container">
                 <button className="close-btn" onClick={this.props.onClick}>
-                    <img src="/asset/close_btn.svg" className="close-btn-img" />
+                    <img src="asset/close_btn.svg" className="close-btn-img" />
                 </button>
             </div>
         );
