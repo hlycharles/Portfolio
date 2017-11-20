@@ -68,6 +68,6 @@ export default class Header extends React.Component {
     }
 
     handleResumeClick() {
-        window.open("/data/resume.pdf", "_blank");
+        window.open("data/resume.pdf", "_blank");
     }
 }

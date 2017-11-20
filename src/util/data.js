@@ -1,5 +1,5 @@
 export function getIntro(callback) {
-    readFile("/data/intro.txt", callback);
+    readFile("data/intro.txt", callback);
 }
 
 export function getProjects(callback) {
@@ -24,7 +24,7 @@ export function getProjects(callback) {
             findProjectInformation(id, putProject);
         })
     }
-    readFile("/data/project/id.txt", parseProject);
+    readFile("data/project/id.txt", parseProject);
 }
 
 function findProjectInformation(id, callback) {
@@ -48,13 +48,13 @@ function findProjectInformation(id, callback) {
             }
         });
     }
-    getInfo("title", `/data/project/${id}/title.txt`);
-    getInfo("intro", `/data/project/${id}/intro.txt`);
-    getInfo("description", `/data/project/${id}/description.txt`);
-    getInfo("languages", `/data/project/${id}/language.txt`, true);
-    getInfo("imgs", `/data/project/${id}/img.txt`, true);
-    getInfo("summary", `/data/project/${id}/summary.txt`);
-    getInfo("technology", `/data/project/${id}/technology.txt`);
+    getInfo("title", `data/project/${id}/title.txt`);
+    getInfo("intro", `data/project/${id}/intro.txt`);
+    getInfo("description", `data/project/${id}/description.txt`);
+    getInfo("languages", `data/project/${id}/language.txt`, true);
+    getInfo("imgs", `data/project/${id}/img.txt`, true);
+    getInfo("summary", `data/project/${id}/summary.txt`);
+    getInfo("technology", `data/project/${id}/technology.txt`);
 }
 
 export function getWork(callback) {
@@ -78,7 +78,7 @@ export function getWork(callback) {
             findWorkInformation(id, putWork);
         })
     }
-    readFile("/data/work/id.txt", parseWork);
+    readFile("data/work/id.txt", parseWork);
 }
 
 function findWorkInformation(id, callback) {
@@ -93,11 +93,11 @@ function findWorkInformation(id, callback) {
             }
         });
     }
-    getInfo("title", `/data/work/${id}/title.txt`);
-    getInfo("intro", `/data/work/${id}/intro.txt`);
-    getInfo("description", `/data/work/${id}/description.txt`);
-    getInfo("summary", `/data/work/${id}/summary.txt`);
-    getInfo("technology", `/data/work/${id}/technology.txt`);
+    getInfo("title", `data/work/${id}/title.txt`);
+    getInfo("intro", `data/work/${id}/intro.txt`);
+    getInfo("description", `data/work/${id}/description.txt`);
+    getInfo("summary", `data/work/${id}/summary.txt`);
+    getInfo("technology", `data/work/${id}/technology.txt`);
 }
 
 function readFile(uri, callback) {
