@@ -56,7 +56,13 @@ export default class Project extends React.Component {
                     </Intro>
                     {
                         imgs.length > 0 &&
-                        <Section theme="gray" padding={false}><Carousel imgs={imgs} renderType={this.props.renderType}/></Section>
+                        <Section theme="gray" padding={false}>
+                            <Carousel
+                                imgs={imgs}
+                                renderType={this.props.renderType}
+                                id={`project_${this.props.project.id}`}
+                            />
+                        </Section>
                     }
                     <Section title="Summary">
                         <Entry content={this.props.project.summary} />

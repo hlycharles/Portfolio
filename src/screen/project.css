@@ -1,5 +1,5 @@
 .project-container {
-    transition: top 500ms ease-in-out;
+    transition: top 500ms ease-out 50ms;
     position: absolute;
     left: 0;
     right: 0;

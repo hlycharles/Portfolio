@@ -144,6 +144,7 @@ export default class Home extends React.Component {
                             <Carousel 
                                 imgs={this.state.instagramImgs}
                                 renderType={this.props.renderType}
+                                id="instagram"
                             />
                             <button className="section-btn" onClick={this.handleInstaClick.bind(this)}>
                                 <h4>See more</h4>

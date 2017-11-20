@@ -1,4 +1,5 @@
 import React from "react";
+import $ from "jquery";
 
 import "./carousel.css";
 
@@ -30,7 +31,7 @@ export default class Carousel extends React.Component {
             imgs.push(<img src={uri} className="carousel-img" key={i} />);
         }
         return (
-            <div className="carousel">{imgs}</div>
+            <div className="carousel" id={this.props.id}>{imgs}</div>
         );
     }
 
@@ -56,11 +57,14 @@ export default class Carousel extends React.Component {
         }
         const imgH = imgW * maxHwRatio;
 
+        /*
         const imgElems = document.getElementsByClassName("carousel-img");
         for (let i = 0; i < imgElems.length; i++) {
             imgElems[i].style.width = `${imgW}px`;
             imgElems[i].style.height = `${imgH}px`;
-        }
+        }*/
+        $(`#${this.props.id}.carousel > img`).width(imgW);
+        $(`#${this.props.id}.carousel > img`).height(imgH);
     }
 
     handleResize() {
