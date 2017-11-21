@@ -71,3 +71,27 @@
         margin-right: 40px;
     }
 }
+
+@media (max-width: 480px) {
+    .header {
+        padding-left: 20px;
+    }
+
+    .header-btn {
+        width: 30px;
+        height: 30px;
+    }
+
+    .btn-img {
+        width: 30px;
+        height: 30px;
+    }
+
+    .page-btn:first-child {
+        margin-left: 30px;
+    }
+
+    .page-btn:not(:last-child) {
+        margin-right: 20px;
+    }
+}
