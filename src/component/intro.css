@@ -36,3 +36,9 @@ h5.intro-text {
         padding-top: 200px;
     }
 }
+
+@media (max-width: 480px) {
+    .intro-wrapper {
+        padding-top: 120px;
+    }
+}

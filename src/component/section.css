@@ -7,6 +7,7 @@
 .section-nopad > h3,
 .section-btn {
     padding-left: 100px;
+    padding-right: 100px;
 }
 
 .section-btn {
@@ -26,5 +27,6 @@
     .section-nopad > h3,
     .section-btn {
         padding-left: 40px;
+        padding-right: 40px;
     }
 }
