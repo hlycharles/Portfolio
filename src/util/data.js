@@ -2,36 +2,44 @@ export function getIntro(callback) {
     readFile("data/intro.txt", callback);
 }
 
-export function getProjects(callback) {
+// get information for a section based on given name
+function getSectionInfo(name, findInformation, onSuccess) {
     const result = [];
-    let projectCount = 0;
+    let resultCount = 0;
 
-    function putProject(index, content) {
+    // put content at given index into result
+    function putInfo(index, content) {
         result[index] = content;
-        projectCount--;
-        if (projectCount === 0) {
-            callback(result);
+        resultCount--;
+        if (resultCount === 0) {
+            onSuccess(result);
         }
     }
 
-    function parseProject(content) {
+    // parse information based on entry ids
+    function parseInfo(content) {
         const ids = content.split("\n");
         for (let i = 0; i < ids.length; i++) {
             result.push({});
         }
-        projectCount = ids.length;
-        ids.forEach(id => {
-            findProjectInformation(id, putProject);
-        })
+        resultCount = ids.length;
+        for (let i = 0; i < ids.length; i++) {
+            findInformation(ids[i], i, putInfo);
+        }
     }
-    readFile("data/project/id.txt", parseProject);
+    readFile(`data/${name}/id.txt`, parseInfo);
 }
 
-function findProjectInformation(id, callback) {
+export function getProjects(onSuccess) {
+    getSectionInfo("project", findProjectInformation, onSuccess);
+}
+
+function findProjectInformation(id, index, callback) {
     let project = {
         id: id,
     };
     let fieldCount = 7;
+    // get content from file
     function getInfo(key, path, shouldParse) {
         readFile(path, r => {
             let content = r;
@@ -44,7 +52,7 @@ function findProjectInformation(id, callback) {
             project[key] = content;
             fieldCount--;
             if (fieldCount === 0) {
-                callback(id, project);
+                callback(index, project);
             }
         });
     }
@@ -57,39 +65,20 @@ function findProjectInformation(id, callback) {
     getInfo("technology", `data/project/${id}/technology.txt`);
 }
 
-export function getWork(callback) {
-    const result = [];
-    let workCount = 0;
-    function putWork(index, content) {
-        result[index] = content;
-        workCount--;
-        if (workCount === 0) {
-            callback(result);
-        }
-    }
-
-    function parseWork(content) {
-        const ids = content.split("\n");
-        for (let i = 0; i < ids.length; i++) {
-            result.push({});
-        }
-        workCount = ids.length;
-        ids.forEach(id => {
-            findWorkInformation(id, putWork);
-        })
-    }
-    readFile("data/work/id.txt", parseWork);
+export function getWork(onSuccess) {
+    getSectionInfo("work", findWorkInformation, onSuccess);
 }
 
-function findWorkInformation(id, callback) {
+function findWorkInformation(id, index, callback) {
     let work = {};
     let fieldCount = 5;
+    // get content from file
     function getInfo(key, path) {
         readFile(path, r => {
             work[key] = r;
             fieldCount--;
             if (fieldCount === 0) {
-                callback(id, work);
+                callback(index, work);
             }
         });
     }

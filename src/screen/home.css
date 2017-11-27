@@ -5,6 +5,7 @@
     right: 0;
     bottom: 0;
     overflow-y: scroll;
+    /* enable scrolling inertia */
     -webkit-overflow-scrolling: touch;
 }
 
@@ -14,6 +15,7 @@
     bottom: 0;
     left: 0;
     right: 0;
+    /* show transition overlay over home page content */
     z-index: 10;
 }
 

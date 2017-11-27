@@ -9,12 +9,13 @@
 
 .intro {
     display: flex;
+    /* vertical layout of contents */
     flex-direction: column;
 }
 
 .intro-text {
-    margin-left: 100px;
-    margin-right: 100px;
+    margin-left: 150px;
+    margin-right: 150px;
 }
 
 h5.intro-text {

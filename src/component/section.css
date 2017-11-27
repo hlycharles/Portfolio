@@ -6,10 +6,11 @@
 /* always pad section titles */
 .section-nopad > h3,
 .section-btn {
-    padding-left: 100px;
-    padding-right: 100px;
+    padding-left: 150px;
+    padding-right: 150px;
 }
 
+/* buttons inside a section */
 .section-btn {
     padding-top: 40px;
 }

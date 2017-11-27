@@ -1,4 +1,5 @@
-.project-container {
+.ts-page {
+    /* page transition animation */
     transition: top 500ms ease-out;
     position: absolute;
     left: 0;
@@ -7,23 +8,26 @@
     z-index: 50;
     overflow-y: scroll;
     background-color: white;
+    /* make sure to cover the screen if content is not tall enough */
     min-height: calc(100% - 140px);
     padding-bottom: 140px;
     -webkit-overflow-scrolling: touch;
 }
 
-.project-container-entering {
+/* page enter by sliding up from bottom of window */
+.ts-page-entering {
     top: 100%;
 }
 
-.project-container-entered {
+.ts-page-entered {
     top: 0;
 }
 
-.project-container-exiting {
+/* page leave by sliding down towards bottom of window */
+.ts-page-exiting {
     top: 0;
 }
 
-.project-container-exited {
+.ts-page-exited {
     top: 100%;
 }

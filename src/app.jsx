@@ -6,6 +6,7 @@ import Header from "./component/header.jsx";
 import Home from "./screen/home.jsx";
 import Work from "./screen/work.jsx";
 import Project from "./screen/project.jsx";
+import Subpage from "./screen/subpage.jsx";
 
 import "./base.css";
 
@@ -14,10 +15,13 @@ export default class App extends React.Component {
         super(props);
         this.state = {
             screen: "Home",
-            screenInit: {
+            // existing screens to render
+            existingScreens: {
                 "Home": true,
             },
+            // scroll position on home page
             homePos: 0,
+            // section of home page to show
             homeSection: null,
             subPage: {},
             renderType: "full",
@@ -39,19 +43,25 @@ export default class App extends React.Component {
             homeSection: this.state.homeSection,
             onFinishShowSection: this.handleFinishShowSection.bind(this),
             renderType: this.state.renderType,
-            onSwitchScreen: this.switchScreen.bind(this),
             onFinishShowSection: this.handleFinishShowSection.bind(this),
         };
         const workProps = {
-            onSwitchScreen: this.switchScreen.bind(this),
             work: this.state.subPage,
-            renderType: this.state.renderType,
+            shouldDisplay: !!this.state.existingScreens["Work"],
         };
         const projectProps = {
-            onSwitchScreen: this.switchScreen.bind(this),
             project: this.state.subPage,
-            renderType: this.state.renderType,
+            shouldDisplay: !!this.state.existingScreens["Project"],
         }
+
+        // subpage components
+        const projectComp = (
+            <Project {...projectProps} />
+        );
+        const workComp = (
+            <Work {...workProps} />
+        );
+
         return (
             <div>
                 <Header 
@@ -61,22 +71,40 @@ export default class App extends React.Component {
                     onShowProject={this.handleShowSection("Project").bind(this)}
                 />
                 {this.transitionify(Home, "Home", homeProps)}
-                {this.transitionify(Work, "Work", workProps)}
-                {this.transitionify(Project, "Project", projectProps)}
+                {this.transitionify(Work, "Work", workProps, workComp)}
+                {this.transitionify(Project, "Project", projectProps, projectComp)}
             </div>
         );
     }
 
-    transitionify(C, label, props) {
+    transitionify(C, label, props, children) {
+        if (children == null) {
+            return (
+                <Transition in={this.state.screen === label} timeout={0}>
+                    {transitionState => (
+                        <C 
+                            transitionState={transitionState}
+                            shouldDisplay={!!this.state.existingScreens[label]}
+                            onTransitionEnd={this.handleTransitionEnd.bind(this)}
+                            onSwitchScreen={this.switchScreen.bind(this)}
+                            {...props}
+                        />
+                    )}
+                </Transition>
+            );
+        }
         return (
             <Transition in={this.state.screen === label} timeout={0}>
                 {transitionState => (
-                    <C 
+                    <Subpage 
                         transitionState={transitionState}
-                        shouldDisplay={!!this.state.screenInit[label]}
+                        shouldDisplay={!!this.state.existingScreens[label]}
                         onTransitionEnd={this.handleTransitionEnd.bind(this)}
+                        onSwitchScreen={this.switchScreen.bind(this)}
                         {...props}
-                    />
+                    >
+                    {children}
+                    </Subpage>
                 )}
             </Transition>
         );
@@ -84,7 +112,8 @@ export default class App extends React.Component {
 
     handleShowSection(section) {
         return () => {
-            if ((!!this.state.screenInit.Work) || (!!this.state.screenInit.Project)) {
+            if ((!!this.state.existingScreens.Work) || (!!this.state.existingScreens.Project)) {
+                // switch to home page to show home sections
                 this.switchScreen("Home");
             }
             this.setState({
@@ -100,7 +129,7 @@ export default class App extends React.Component {
     }
 
     switchScreen(screen, arg) {
-        const screens = this.state.screenInit;
+        const screens = this.state.existingScreens;
         screens[screen] = true;
         if (screen === "Work" || screen === "Project") {
             this.setState({
@@ -109,15 +138,16 @@ export default class App extends React.Component {
         }
         this.setState({
             screen: screen,
-            screenInit: screens,
+            existingScreens: screens,
         });
     }
 
     handleTransitionEnd() {
+        // show only one page once transition ends
         const screens = {};
         screens[this.state.screen] = true;
         this.setState({
-            screenInit: screens,
+            existingScreens: screens,
         });
     }
 

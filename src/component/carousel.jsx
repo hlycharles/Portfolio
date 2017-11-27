@@ -17,6 +17,7 @@ export default class Carousel extends React.Component {
     }
 
     componentDidUpdate() {
+        // update image size when carousel updates
         this.setImgSize(this.props.imgs);
     }
 
@@ -27,6 +28,7 @@ export default class Carousel extends React.Component {
         const imgs = [];
         for (let i = 0; i < this.props.imgs.length; i++) {
             const img = this.props.imgs[i];
+            // image can be from a url or local source
             const uri = (!!img.isUrl) ? img.src : `asset/${img.src}`;
             imgs.push(<img src={uri} className="carousel-img" key={i} />);
         }
@@ -39,6 +41,7 @@ export default class Carousel extends React.Component {
         if (imgs.length == 0) {
             return;
         }
+
         // calculate maximum height width ratio
         let maxHwRatio = -1;
         for (let i = 0; i < imgs.length; i++) {
@@ -46,10 +49,12 @@ export default class Carousel extends React.Component {
                 maxHwRatio = imgs[i].hwRatio;
             }
         }
+
         // calculate the maximum height needed
         const w = window.innerWidth;
 
-        let imgW = 200;
+        // set image width based on window and image size
+        let imgW = 0;
         if (this.props.renderType == null || this.props.renderType === "full") {
             imgW = (maxHwRatio >= 1.5) ? w * 0.3 : w * 0.35;
         } else {
@@ -57,12 +62,6 @@ export default class Carousel extends React.Component {
         }
         const imgH = imgW * maxHwRatio;
 
-        /*
-        const imgElems = document.getElementsByClassName("carousel-img");
-        for (let i = 0; i < imgElems.length; i++) {
-            imgElems[i].style.width = `${imgW}px`;
-            imgElems[i].style.height = `${imgH}px`;
-        }*/
         $(`#${this.props.id}.carousel > img`).width(imgW);
         $(`#${this.props.id}.carousel > img`).height(imgH);
     }

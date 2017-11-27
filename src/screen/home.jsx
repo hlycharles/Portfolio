@@ -10,6 +10,7 @@ import { LanguageIcon } from "../util/type.js";
 
 import "./home.css";
 
+// number of recent Instagram photos to show
 const instagramCount = 3;
 
 export default class Home extends React.Component {
@@ -17,10 +18,13 @@ export default class Home extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            // gray overlay for transitioning between pages
             showOverlay: false,
+            // introduction content
             intro: "",
             works: [],
             projects: [],
+            // loaded Instagram images
             instagramImgs: [],
         };
     }
@@ -49,10 +53,6 @@ export default class Home extends React.Component {
         this.requestInstagram();
     }
 
-    componentWillUnmount() {
-        $(window).off("resize", this.handleResize.bind(this));
-    }
-
     componentDidUpdate() {
         const overlays = document.getElementsByClassName("shadow-overlay");
         if (overlays.length > 0) {
@@ -64,28 +64,37 @@ export default class Home extends React.Component {
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.transitionState === "exiting" || nextProps.transitionState === "entering") {
+            // show overlay during page transition
             this.setState({
                 showOverlay: true,
             });
         }
         if (this.props.transitionState === "entered" && nextProps.transitionState === "exiting") {
+            // record scroll position so that it can be recovered when returning to home page 
             this.props.onRecordHomePos(-$(".home-container-content").first().offset().top);
         }
         if (nextProps.transitionState === "entering") {
+            // restore scroll position
             $(".home-container").scrollTop(this.props.homePos);
-        } else if (nextProps.homeSection !== this.props.homeSection && nextProps.homeSection != null) {
+        } else if (
+            nextProps.transitionState === "entered" &&
+            nextProps.homeSection != null
+        ) {
             const currScroll = $(".home-container").first().scrollTop();
-            $(".home-container").animate({
-                scrollTop: currScroll + $(`#${nextProps.homeSection}`).position().top - 100,
-            }, 500, this.props.onFinishShowSection);
+            if ($(`#${nextProps.homeSection}`).position() != null) {
+                $(".home-container").animate({
+                    scrollTop: currScroll + $(`#${nextProps.homeSection}`).position().top - 100,
+                }, 500, this.props.onFinishShowSection);
+            }
         }
     }
 
     render() {
-        const transitionState = this.props.transitionState
+        const transitionState = this.props.transitionState;
         if (!this.props.shouldDisplay) {
             return null;
         }
+
         let overlay = null;
         if (this.state.showOverlay) {
             if (transitionState === "exited") {
@@ -103,6 +112,7 @@ export default class Home extends React.Component {
         const projects = [];
         for (let i = 0; i < this.state.projects.length; i++) {
             const project = this.state.projects[i];
+            // parse icons for programming languages
             let icons = [];
             if (project.languages.length > 0) {
                 project.languages.forEach(l => {
@@ -136,6 +146,7 @@ export default class Home extends React.Component {
                 {overlay}
                 <div className={`home-container home-container-${transitionState}`}>
                     <div className="home-container-content">
+                        {/* personal introduction */}
                         <Intro id="intro-home">
                             <h2 className="title intro-text">Luyao Hou</h2>
                             <h5 className="intro-text">{this.state.intro}</h5>
@@ -146,17 +157,21 @@ export default class Home extends React.Component {
                                 renderType={this.props.renderType}
                                 id="instagram"
                             />
+                            {/* external link to personal Instagram page */}
                             <button className="section-btn" onClick={this.handleInstaClick.bind(this)}>
                                 <h4>See more</h4>
                             </button>
                         </Section>
+                        {/* Work experience section */}
                         <Section title="Work Experiences" theme="gray" id="Work">
                             {works}
                         </Section>
+                        {/* Project section */}
                         <Section title="Projects" id="Project">
                             {projects}
                         </Section>
                         <Section title="Resume" theme="gray">
+                            {/* Link to resume */}
                             <button onClick={this.handleResumeClick.bind(this)}><h4 className="normal">Press to view</h4></button>
                         </Section>
                     </div>
@@ -217,6 +232,7 @@ export default class Home extends React.Component {
     }
 
     handleResumeClick() {
+        // open resume in pdf format in new window
         window.open("data/resume.pdf", "_blank");
     }
 

@@ -1,3 +1,4 @@
+/* horizontal scroll view */
 .carousel {
     width: 100%;
     display: flex;
@@ -10,6 +11,7 @@
     object-fit: contain;
 }
 
+/* spacing between carousel images */
 .carousel-img {
     padding-left: 5%;
 }

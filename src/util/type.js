@@ -1,3 +1,4 @@
+// icons for different programming languages
 export const LanguageIcon = {
     "Swift": "swift.png",
     "Objective-C": "objc.png",

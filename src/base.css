@@ -2,6 +2,7 @@ body {
     margin: 0;
 }
 
+/* remove default button style */
 button {
     padding: 0;
     border: none;
@@ -25,8 +26,8 @@ h2 {
 }
 
 h3 {
-    font-weight: lighter;
-    font-size: 28px;
+    font-weight: bold;
+    font-size: 30px;
 }
 
 h4 {
@@ -45,6 +46,7 @@ p {
     line-height: 1.8;
 }
 
+/* normal font weight */
 .normal {
     font-weight: normal;
 }
@@ -58,6 +60,7 @@ p {
 }
 
 button:hover {
+    /* underline the button when hovered */
     text-decoration: underline;
     cursor: pointer;
 }

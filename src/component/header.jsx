@@ -11,14 +11,17 @@ export default class Header extends React.Component {
     renderFullHeader() {
         return (
             <div className="header">
+                {/* social media links */}
                 <div className="social-link">
                     <button className="header-btn insta-btn" onClick={this.handleInstaClick.bind(this)}>
                         <img className="btn-img" src="asset/insta.png" />
                     </button>
                 </div>
+                {/* home button */}
                 <button className="header-btn home-btn" onClick={this.handleSwitchScreen("Home").bind(this)}>
                     <img className="btn-img" src="asset/home.png" />
                 </button>
+                {/* links to sections on home page */}
                 <div className="page-link">
                     <button className="page-btn" onClick={this.props.onShowWork}>
                         <h5>Work</h5>
@@ -34,14 +37,17 @@ export default class Header extends React.Component {
         );
     }
 
+    // remove home button on smaller screens
     renderLiteHeader() {
         return  (
             <div className="header">
+                {/* social media links */}
                 <div className="social-link">
                     <button className="header-btn insta-btn" onClick={this.handleInstaClick.bind(this)}>
                         <img className="btn-img" src="asset/insta.png" />
                     </button>
                 </div>
+                {/* links to sections on home page */}
                 <div className="page-link">
                     <button className="page-btn" onClick={this.props.onShowWork}>
                         <h5>Work</h5>

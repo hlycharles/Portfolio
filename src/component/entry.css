@@ -9,7 +9,14 @@
 
 .entry-title > button {
     text-align: left;
+}
+
+.entry-title > button.short {
     width: 45%;
+}
+
+.entry-title > button.wide {
+    width: 100%;
 }
 
 .entry-content {
@@ -25,6 +32,7 @@
 .entry-img {
     width: 30px;
     height: 30px;
+    /* rounded corner for images */
     border-radius: 5px;
     object-fit: contain;
 }
@@ -34,11 +42,13 @@
 }
 
 @media (max-width: 992px) {
+    /* put images under title on smaller devices */
     .entry-title {
         flex-direction: column;
     }
 
-    .entry-title > button {
+    .entry-title > button.short,
+    .entry-title > button.wide {
         width: auto;
     }
 
