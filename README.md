@@ -1,5 +1,5 @@
 # Portfolio
-My personal portfolio including
+My personal portfolio showing
 
 * Pesonal introduction
 * Work experiences
